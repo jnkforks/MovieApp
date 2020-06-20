@@ -1,0 +1,13 @@
+apply from: "$rootDir/common.gradle"
+
+dependencies{
+
+    /*Android Support*/
+    implementation AndroidSupport.design
+    implementation AndroidSupport.appCompat
+    implementation AndroidSupport.constraintLayout
+
+    /*Coroutine*/
+    implementation Coroutines.core
+    implementation Coroutines.android
+}
