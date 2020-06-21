@@ -154,7 +154,7 @@ object Stheto{
     const val stheto = "com.facebook.stetho:stetho:${Version.stheto}"
 }
 
-object Test {
+object Testing {
     const val junit = "junit:junit:${Version.junitVersion}"
     const val junitExt = "androidx.test.ext:junit:${Version.junitExt}"
     const val mockitoCore = "org.mockito:mockito-core:${Version.mockitoCore}"

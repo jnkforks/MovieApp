@@ -29,7 +29,7 @@ interface MovieDetailContract {
 
 class MovieDetailViewModel @Inject constructor(
     private val useCase: MovieUseCase,
-    private val dispatcher: SchedulerProvider
+    dispatcher: SchedulerProvider
 ) : BaseViewModel(dispatcher), MovieDetailContract {
 
     /**
