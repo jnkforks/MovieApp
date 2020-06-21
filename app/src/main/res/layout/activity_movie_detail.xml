@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
+    android:background="@color/colorWhite"
     tools:context=".feature.detail.MovieDetailActivity">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -39,9 +40,9 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?actionBarSize"
-                app:titleTextColor="@color/colorWhite"
+                app:layout_collapseMode="pin"
                 app:subtitleTextColor="@color/colorWhite"
-                app:layout_collapseMode="pin" />
+                app:titleTextColor="@color/colorWhite" />
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
@@ -113,13 +114,78 @@
                 <TextView
                     android:id="@+id/tvOverview"
                     android:layout_width="0dp"
-                    android:layout_height="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dimen_16"
                     android:text="@string/ex_overview"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/ratingMovie" />
+
+
+                <View
+                    android:id="@+id/viewSeparator"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="@dimen/dimen_24"
+                    android:background="@color/colorBlackAlpha40"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvOverview" />
+
+                <TextView
+                    android:id="@+id/tvReviewHeader"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen_10"
+                    android:text="@string/reviews_header"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/viewSeparator" />
+
+                <TextView
+                    android:id="@+id/tvReviewTotal"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimen_16"
+                    android:textColor="@color/colorBlack"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@id/tvReviewHeader"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/tvReviewHeader"
+                    app:layout_constraintTop_toTopOf="@id/tvReviewHeader"
+                    app:layout_constraintVertical_bias="0"
+                    tools:text="100" />
+
+                <View
+                    android:id="@+id/viewSeparator2"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="@dimen/dimen_10"
+                    android:background="@color/colorBlackAlpha40"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvReviewHeader" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvReviews"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="@dimen/dimen_16"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/viewSeparator2" />
+
+                <include
+                    android:id="@+id/viewEmpty"
+                    layout="@layout/base_empty_reviews"
+                    android:visibility="visible"
+                    android:layout_height="0dp"
+                    android:layout_width="0dp"
+                    android:layout_marginTop="@dimen/dimen_16"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/viewSeparator2" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

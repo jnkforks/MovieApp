@@ -8,6 +8,7 @@ import com.anggitprayogo.core.util.state.ResultState
 import com.anggitprayogo.core.util.thread.SchedulerProvider
 import com.anggitprayogo.movieapp.data.db.entity.MovieEntity
 import com.anggitprayogo.movieapp.data.entity.MovieDetail
+import com.anggitprayogo.movieapp.data.entity.MovieReviews
 import com.anggitprayogo.movieapp.domain.MovieUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -21,6 +22,7 @@ import javax.inject.Inject
 interface MovieDetailContract {
     fun getMovieDetail(movieId: String)
     fun getMovieDetailDb(movieId: String)
+    fun getReviewsByMovieId(movieId: String)
     fun insertMovieToDb(movieEntity: MovieEntity)
     fun deleteMovieFromDb(movieEntity: MovieEntity)
 }
@@ -38,11 +40,18 @@ class MovieDetailViewModel @Inject constructor(
         get() = _state
 
     /**
-     * Popular Movie State
+     * Detail Movie
      */
     private val _resultDetailMovie = MutableLiveData<MovieDetail>()
     val resultDetailMovie: LiveData<MovieDetail>
         get() = _resultDetailMovie
+
+    /**
+     * Reviews
+     */
+    private val _resultReviews = MutableLiveData<MovieReviews>()
+    val resultReviews: LiveData<MovieReviews>
+        get() = _resultReviews
 
     /**
      * Insert movie
@@ -96,6 +105,21 @@ class MovieDetailViewModel @Inject constructor(
                     is ResultState.NetworkError -> {
                         _networkError.postValue(true)
                     }
+                }
+            }
+        }
+    }
+
+    override fun getReviewsByMovieId(movieId: String) {
+        _state.value = LoaderState.ShowLoading
+        launch {
+            val result = useCase.getMovieReviewsByMovieId(movieId)
+            withContext(Dispatchers.Main) {
+                _state.value = LoaderState.HideLoading
+                when (result) {
+                    is ResultState.Success -> _resultReviews.postValue(result.data)
+                    is ResultState.Error -> _error.postValue(result.error)
+                    is ResultState.NetworkError -> _networkError.postValue(true)
                 }
             }
         }

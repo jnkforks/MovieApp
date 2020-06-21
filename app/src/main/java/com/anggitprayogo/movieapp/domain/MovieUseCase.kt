@@ -4,6 +4,7 @@ import com.anggitprayogo.core.util.ext.safeApiCall
 import com.anggitprayogo.core.util.state.ResultState
 import com.anggitprayogo.movieapp.data.db.entity.MovieEntity
 import com.anggitprayogo.movieapp.data.entity.MovieDetail
+import com.anggitprayogo.movieapp.data.entity.MovieReviews
 import com.anggitprayogo.movieapp.data.entity.Movies
 import com.anggitprayogo.movieapp.data.repository.MovieRepository
 import javax.inject.Inject
@@ -14,14 +15,16 @@ import javax.inject.Inject
 class MovieUseCase @Inject constructor(
     private val movieRepository: MovieRepository
 ) {
-
+    /**
+     * Remote
+     */
     suspend fun getPopularMovie(): ResultState<Movies> {
         return safeApiCall {
             val response = movieRepository.getPopularMovie()
             try {
                 ResultState.Success(response.body()!!)
             } catch (e: Exception) {
-                ResultState.Error("", response.code())
+                ResultState.Error(e.localizedMessage, response.code())
             }
         }
     }
@@ -32,7 +35,7 @@ class MovieUseCase @Inject constructor(
             try {
                 ResultState.Success(response.body()!!)
             } catch (e: Exception) {
-                ResultState.Error("", response.code())
+                ResultState.Error(e.localizedMessage, response.code())
             }
         }
     }
@@ -43,7 +46,7 @@ class MovieUseCase @Inject constructor(
             try {
                 ResultState.Success(response.body()!!)
             } catch (e: Exception) {
-                ResultState.Error("", response.code())
+                ResultState.Error(e.localizedMessage, response.code())
             }
         }
     }
@@ -54,7 +57,7 @@ class MovieUseCase @Inject constructor(
             try {
                 ResultState.Success(response.body()!!)
             } catch (e: Exception) {
-                ResultState.Error("", response.code())
+                ResultState.Error(e.localizedMessage, response.code())
             }
         }
     }
@@ -65,7 +68,18 @@ class MovieUseCase @Inject constructor(
             try {
                 ResultState.Success(response.body()!!)
             } catch (e: Exception) {
-                ResultState.Error("", response.code())
+                ResultState.Error(e.localizedMessage, response.code())
+            }
+        }
+    }
+
+    suspend fun getMovieReviewsByMovieId(movieId: String): ResultState<MovieReviews> {
+        return safeApiCall {
+            val response = movieRepository.getMovieReviewsByMovieId(movieId)
+            try {
+                ResultState.Success(response.body()!!)
+            } catch (e: Exception) {
+                ResultState.Error(e.localizedMessage, response.code())
             }
         }
     }
@@ -100,10 +114,10 @@ class MovieUseCase @Inject constructor(
         }
     }
 
-    suspend fun deleteMovieFromDb(movieEntity: MovieEntity){
+    suspend fun deleteMovieFromDb(movieEntity: MovieEntity) {
         try {
             movieRepository.deleteMovie(movieEntity)
-        }catch (e: Exception){
+        } catch (e: Exception) {
             throw Exception(e)
         }
     }

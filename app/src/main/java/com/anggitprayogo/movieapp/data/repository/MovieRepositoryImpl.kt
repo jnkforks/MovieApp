@@ -3,6 +3,7 @@ package com.anggitprayogo.movieapp.data.repository
 import com.anggitprayogo.movieapp.data.db.dao.MovieDao
 import com.anggitprayogo.movieapp.data.db.entity.MovieEntity
 import com.anggitprayogo.movieapp.data.entity.MovieDetail
+import com.anggitprayogo.movieapp.data.entity.MovieReviews
 import com.anggitprayogo.movieapp.data.entity.Movies
 import com.anggitprayogo.movieapp.data.routes.NetworkService
 import retrofit2.Response
@@ -31,6 +32,10 @@ class MovieRepositoryImpl @Inject constructor(
 
     override suspend fun getDetailMovie(movieId: String): Response<MovieDetail> {
         return service.getDetailMovie(movieId)
+    }
+
+    override suspend fun getMovieReviewsByMovieId(movieId: String): Response<MovieReviews> {
+        return service.getMovieReviewsByMovieId(movieId)
     }
 
     override suspend fun fetchAllMoviesDao(): List<MovieEntity> {

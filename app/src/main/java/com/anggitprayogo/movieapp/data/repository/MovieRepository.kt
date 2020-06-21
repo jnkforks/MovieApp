@@ -2,6 +2,7 @@ package com.anggitprayogo.movieapp.data.repository
 
 import com.anggitprayogo.movieapp.data.db.entity.MovieEntity
 import com.anggitprayogo.movieapp.data.entity.MovieDetail
+import com.anggitprayogo.movieapp.data.entity.MovieReviews
 import com.anggitprayogo.movieapp.data.entity.Movies
 import retrofit2.Response
 
@@ -10,6 +11,9 @@ import retrofit2.Response
  */
 interface MovieRepository {
 
+    /**
+     * Remote
+     */
     suspend fun getPopularMovie(): Response<Movies>
 
     suspend fun getUpcomingMovie(): Response<Movies>
@@ -20,6 +24,12 @@ interface MovieRepository {
 
     suspend fun getDetailMovie(movieId: String): Response<MovieDetail>
 
+    suspend fun getMovieReviewsByMovieId(movieId: String): Response<MovieReviews>
+
+
+    /**
+     * Local
+     */
     suspend fun fetchAllMoviesDao(): List<MovieEntity>
 
     suspend fun fetchMovieByMovieId(movieId: Int): List<MovieEntity>

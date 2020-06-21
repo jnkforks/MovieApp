@@ -1,6 +1,7 @@
 package com.anggitprayogo.movieapp.data.routes
 
 import com.anggitprayogo.movieapp.data.entity.MovieDetail
+import com.anggitprayogo.movieapp.data.entity.MovieReviews
 import com.anggitprayogo.movieapp.data.entity.Movies
 import retrofit2.Response
 import retrofit2.http.GET
@@ -25,4 +26,7 @@ interface NetworkService {
 
     @GET("movie/{movie_id}")
     suspend fun getDetailMovie(@Path("movie_id") movieId: String): Response<MovieDetail>
+
+    @GET("movie/{movie_id}/reviews")
+    suspend fun getMovieReviewsByMovieId(@Path("movie_id") movieId: String): Response<MovieReviews>
 }

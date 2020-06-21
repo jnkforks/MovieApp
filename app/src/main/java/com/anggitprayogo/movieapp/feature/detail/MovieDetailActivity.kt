@@ -6,13 +6,19 @@ import android.view.MenuItem
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.anggitprayogo.core.base.BaseActivity
 import com.anggitprayogo.core.util.ext.load
+import com.anggitprayogo.core.util.ext.setGone
+import com.anggitprayogo.core.util.ext.setVisible
 import com.anggitprayogo.core.util.ext.toast
 import com.anggitprayogo.movieapp.BaseApplication
 import com.anggitprayogo.movieapp.R
 import com.anggitprayogo.movieapp.data.db.entity.MovieEntity
 import com.anggitprayogo.movieapp.data.entity.MovieDetail
+import com.anggitprayogo.movieapp.data.entity.MovieReviews
+import com.anggitprayogo.movieapp.data.entity.Review
 import com.google.android.material.appbar.AppBarLayout
 import kotlinx.android.synthetic.main.activity_movie_detail.*
 import javax.inject.Inject
@@ -34,6 +40,12 @@ class MovieDetailActivity : BaseActivity() {
 
     private var favouriteActive = false
 
+    private val reviewsAdapter: ReviewsAdapter by lazy {
+        ReviewsAdapter()
+    }
+
+    private var reviewsList = mutableListOf<Review>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         initInjector()
         super.onCreate(savedInstanceState)
@@ -42,8 +54,15 @@ class MovieDetailActivity : BaseActivity() {
         initViewModel()
         initObserver()
         initListener()
+        initRecyclerViewReviews()
         fetchData()
         initToolbar()
+    }
+
+    private fun initRecyclerViewReviews() {
+        rvReviews.adapter = reviewsAdapter
+        rvReviews.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        rvReviews.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
     }
 
     private fun initToolbar() {
@@ -111,6 +130,7 @@ class MovieDetailActivity : BaseActivity() {
     private fun fetchData() {
         movieId?.let {
             viewModel.getMovieDetail(it)
+            viewModel.getReviewsByMovieId(it)
             viewModel.getMovieDetailDb(it)
         }
     }
@@ -146,6 +166,12 @@ class MovieDetailActivity : BaseActivity() {
             }
         })
 
+        viewModel.resultReviews.observe(this, Observer {
+            it?.let {
+                handleStateReviews(it)
+            }
+        })
+
         viewModel.resultDetailFromDb.observe(this, Observer {
             handleStateMovieDetailFromDb(it)
         })
@@ -175,8 +201,26 @@ class MovieDetailActivity : BaseActivity() {
         })
     }
 
+    private fun handleStateReviews(reviews: MovieReviews) {
+        handleReviewEmptyState(reviews)
+        tvReviewTotal.text = reviews.results.size.toString()
+        reviewsList.clear()
+        reviewsList.addAll(reviews.results.toMutableList())
+        reviewsAdapter.setItems(reviewsList)
+    }
+
+    private fun handleReviewEmptyState(reviews: MovieReviews) {
+        if (reviews.results.isEmpty()){
+            rvReviews.setGone()
+            viewEmpty.setVisible()
+        }else{
+            rvReviews.setVisible()
+            viewEmpty.setGone()
+        }
+    }
+
     private fun handleStateNetworkError(networkError: Boolean) {
-        if(networkError){
+        if (networkError) {
             toast(getString(R.string.message_error_no_internet_body))
         }
     }
