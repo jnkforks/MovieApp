@@ -22,6 +22,7 @@ interface MovieDetailContract {
     fun getMovieDetail(movieId: String)
     fun getMovieDetailDb(movieId: String)
     fun insertMovieToDb(movieEntity: MovieEntity)
+    fun deleteMovieFromDb(movieEntity: MovieEntity)
 }
 
 class MovieDetailViewModel @Inject constructor(
@@ -50,12 +51,18 @@ class MovieDetailViewModel @Inject constructor(
     val resultInsertMovieToDb: LiveData<Boolean>
         get() = _resultInsertMovieToDb
 
+    /**
+     * Delete Movie
+     */
+    private val _resultDeleteMovieFromDb = MutableLiveData<Boolean>()
+    val resultDeleteMovieFromDb: LiveData<Boolean>
+        get() = _resultDeleteMovieFromDb
 
     /**
      * Movie Detail from db
      */
-    private val _resultDetailFromDb = MutableLiveData<MovieEntity>()
-    val resultDetailFromDb: LiveData<MovieEntity>
+    private val _resultDetailFromDb = MutableLiveData<List<MovieEntity>>()
+    val resultDetailFromDb: LiveData<List<MovieEntity>>
         get() = _resultDetailFromDb
 
     /**
@@ -112,6 +119,21 @@ class MovieDetailViewModel @Inject constructor(
                 useCase.insertMovieToDb(movieEntity)
                 withContext(Dispatchers.Main) {
                     _resultInsertMovieToDb.postValue(true)
+                }
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
+                    _error.postValue(e.localizedMessage)
+                }
+            }
+        }
+    }
+
+    override fun deleteMovieFromDb(movieEntity: MovieEntity) {
+        launch {
+            try {
+                useCase.deleteMovieFromDb(movieEntity)
+                withContext(Dispatchers.Main) {
+                    _resultDeleteMovieFromDb.postValue(true)
                 }
             } catch (e: Exception) {
                 withContext(Dispatchers.Main) {

@@ -37,11 +37,15 @@ class MovieRepositoryImpl @Inject constructor(
         return movieDao.fetchAllMovies()
     }
 
-    override suspend fun fetchMovieByMovieId(movieId: Int): MovieEntity {
+    override suspend fun fetchMovieByMovieId(movieId: Int): List<MovieEntity> {
         return movieDao.fetchMovieByMovieId(movieId)
     }
 
     override suspend fun insertMovie(movieEntity: MovieEntity) {
         return movieDao.insertMovie(movieEntity)
+    }
+
+    override suspend fun deleteMovie(movieEntity: MovieEntity) {
+        return movieDao.deleteMovie(movieEntity)
     }
 }

@@ -22,7 +22,9 @@ interface MovieRepository {
 
     suspend fun fetchAllMoviesDao(): List<MovieEntity>
 
-    suspend fun fetchMovieByMovieId(movieId: Int): MovieEntity
+    suspend fun fetchMovieByMovieId(movieId: Int): List<MovieEntity>
 
     suspend fun insertMovie(movieEntity: MovieEntity)
+
+    suspend fun deleteMovie(movieEntity: MovieEntity)
 }

@@ -11,4 +11,6 @@
     <string name="now_playing">Now Playing</string>
     <string name="imdb_rating_template">IMDB %s/5.0</string>
     <string name="favourite">favourite</string>
+    <string name="message_success_remove_movie_from_favourite">Remove movie from favourite</string>
+    <string name="message_success_add_movie_from_favourite">Add movie to favoruite</string>
 </resources>

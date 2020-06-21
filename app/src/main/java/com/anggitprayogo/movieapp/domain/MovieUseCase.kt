@@ -83,7 +83,7 @@ class MovieUseCase @Inject constructor(
         }
     }
 
-    suspend fun getMovieDetailByMovieId(movieId: Int): ResultState<MovieEntity> {
+    suspend fun getMovieDetailByMovieId(movieId: Int): ResultState<List<MovieEntity>> {
         return try {
             val response = movieRepository.fetchMovieByMovieId(movieId)
             ResultState.Success(response)
@@ -96,6 +96,14 @@ class MovieUseCase @Inject constructor(
         try {
             movieRepository.insertMovie(movieEntity)
         } catch (e: Exception) {
+            throw Exception(e)
+        }
+    }
+
+    suspend fun deleteMovieFromDb(movieEntity: MovieEntity){
+        try {
+            movieRepository.deleteMovie(movieEntity)
+        }catch (e: Exception){
             throw Exception(e)
         }
     }

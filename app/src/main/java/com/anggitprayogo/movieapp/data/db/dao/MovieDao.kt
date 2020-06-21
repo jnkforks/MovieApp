@@ -19,7 +19,7 @@ interface MovieDao {
     suspend fun fetchMovieById(uid: Long): MovieEntity
 
     @Query("SELECT * FROM movies WHERE movie_id=:movieId")
-    suspend fun fetchMovieByMovieId(movieId: Int): MovieEntity
+    suspend fun fetchMovieByMovieId(movieId: Int): List<MovieEntity>
 
     @Insert
     suspend fun insertMovie(movieEntity: MovieEntity)

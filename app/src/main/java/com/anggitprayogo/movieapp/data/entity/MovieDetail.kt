@@ -71,6 +71,10 @@ data class MovieDetail(
         return BuildConfig.IMAGE_URL + backdropPath
     }
 
+    fun getPosterMovie(): String{
+        return BuildConfig.IMAGE_URL + posterPath
+    }
+
     fun getImdbRating(): Double? {
         return (voteAverage?.div(10.0))?.times(5.0)
     }

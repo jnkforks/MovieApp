@@ -8,8 +8,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.anggitprayogo.core.base.BaseActivity
 import com.anggitprayogo.core.util.ext.load
+import com.anggitprayogo.core.util.ext.toast
 import com.anggitprayogo.movieapp.BaseApplication
 import com.anggitprayogo.movieapp.R
+import com.anggitprayogo.movieapp.data.db.entity.MovieEntity
 import com.anggitprayogo.movieapp.data.entity.MovieDetail
 import com.google.android.material.appbar.AppBarLayout
 import kotlinx.android.synthetic.main.activity_movie_detail.*
@@ -24,9 +26,13 @@ class MovieDetailActivity : BaseActivity() {
 
     private var movieDetail: MovieDetail? = null
 
+    private var movieEntity: MovieEntity? = null
+
     private var movieId: String? = null
 
     private var menu: Menu? = null
+
+    private var favouriteActive = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         initInjector()
@@ -103,11 +109,30 @@ class MovieDetailActivity : BaseActivity() {
     }
 
     private fun fetchData() {
-        movieId?.let { viewModel.getMovieDetail(it) }
+        movieId?.let {
+            viewModel.getMovieDetail(it)
+            viewModel.getMovieDetailDb(it)
+        }
     }
 
     private fun initListener() {
-
+        fabFavourite.setOnClickListener {
+            if (favouriteActive) {
+                movieEntity?.let { it1 -> viewModel.deleteMovieFromDb(it1) }
+            } else {
+                val movieEntity = MovieEntity(
+                    movieId = movieId?.toInt(),
+                    title = movieDetail?.title,
+                    genres = movieDetail?.getMetaData(),
+                    vote = movieDetail?.getImdbRating(),
+                    releaseDate = movieDetail?.releaseDate,
+                    overview = movieDetail?.overview,
+                    bannerUrl = movieDetail?.getBannerMovie(),
+                    posterUrl = movieDetail?.getPosterMovie()
+                )
+                viewModel.insertMovieToDb(movieEntity)
+            }
+        }
     }
 
     private fun initViewModel() {
@@ -120,6 +145,46 @@ class MovieDetailActivity : BaseActivity() {
                 handleStateMovieDetail(it)
             }
         })
+
+        viewModel.resultDetailFromDb.observe(this, Observer {
+            handleStateMovieDetailFromDb(it)
+        })
+
+        viewModel.resultInsertMovieToDb.observe(this, Observer {
+            if (it) {
+                movieId?.let { viewModel.getMovieDetailDb(it) }
+                toast(getString(R.string.message_success_add_movie_from_favourite))
+            }
+        })
+
+        viewModel.resultDeleteMovieFromDb.observe(this, Observer {
+            if (it) {
+                movieId?.let { viewModel.getMovieDetailDb(it) }
+                toast(getString(R.string.message_success_remove_movie_from_favourite))
+            }
+        })
+
+        viewModel.error.observe(this, Observer {
+            toast(it)
+        })
+    }
+
+    private fun handleStateMovieDetailFromDb(result: List<MovieEntity>) {
+        val menuItem = menu?.findItem(R.id.action_favourite)
+        menuItem?.let {
+            if (result.isEmpty()) {
+                favouriteActive = false
+                val icon = R.drawable.ic_baseline_favorite_border_white_24
+                fabFavourite.setImageResource(icon)
+                menuItem.setIcon(icon)
+            } else {
+                movieEntity = result.first()
+                favouriteActive = true
+                val icon = R.drawable.ic_baseline_favorite_red_24
+                fabFavourite.setImageResource(icon)
+                menuItem.setIcon(icon)
+            }
+        }
     }
 
     private fun handleStateMovieDetail(movie: MovieDetail) {
