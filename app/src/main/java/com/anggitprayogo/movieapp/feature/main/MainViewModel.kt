@@ -7,6 +7,7 @@ import com.anggitprayogo.core.util.state.LoaderState
 import com.anggitprayogo.core.util.state.ResultState
 import com.anggitprayogo.core.util.thread.SchedulerProvider
 import com.anggitprayogo.movieapp.data.entity.Movie
+import com.anggitprayogo.movieapp.data.enum.MovieFilter
 import com.anggitprayogo.movieapp.domain.MovieUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -21,6 +22,7 @@ interface MainViewModelContract {
     fun getTopRatedMovie()
     fun getPlayingNowMovie()
     fun getUpcomingMovie()
+    fun getMovie(movieFilter: MovieFilter)
 }
 
 class MainViewModel @Inject constructor(
@@ -81,6 +83,15 @@ class MainViewModel @Inject constructor(
 
     init {
         getPopularMovie()
+    }
+
+    override fun getMovie(movieFilter: MovieFilter) {
+        when(movieFilter){
+            MovieFilter.POPULAR -> getPopularMovie()
+            MovieFilter.NOW_PLAYING -> getPlayingNowMovie()
+            MovieFilter.UP_COMING -> getUpcomingMovie()
+            MovieFilter.TOP_RATED -> getTopRatedMovie()
+        }
     }
 
     override fun getPopularMovie() {

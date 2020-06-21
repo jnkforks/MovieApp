@@ -8,14 +8,16 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.anggitprayogo.core.base.BaseActivity
 import com.anggitprayogo.core.util.ext.setGone
 import com.anggitprayogo.core.util.ext.setVisible
+import com.anggitprayogo.core.util.ext.toast
 import com.anggitprayogo.core.util.state.LoaderState
 import com.anggitprayogo.movieapp.BaseApplication
 import com.anggitprayogo.movieapp.R
 import com.anggitprayogo.movieapp.data.entity.Movie
+import com.anggitprayogo.movieapp.data.enum.MovieFilter
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
-class MainActivity : BaseActivity() {
+class MainActivity : BaseActivity(), FilterBottomSheetDialogFragment.ItemClickListener {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -42,6 +44,10 @@ class MainActivity : BaseActivity() {
             viewModel.getPopularMovie()
             swipeRefreshLayout.isRefreshing = false
         }
+
+        cvFilter.setOnClickListener {
+            showFilterBottomSheet()
+        }
     }
 
     private fun initObserver() {
@@ -52,6 +58,24 @@ class MainActivity : BaseActivity() {
         })
 
         viewModel.resultPopularMovie.observe(this, Observer {
+            it?.let {
+                handleStatePopularMovie(it)
+            }
+        })
+
+        viewModel.resultNowPlaying.observe(this, Observer {
+            it?.let {
+                handleStatePopularMovie(it)
+            }
+        })
+
+        viewModel.resultTopRatedMovie.observe(this, Observer {
+            it?.let {
+                handleStatePopularMovie(it)
+            }
+        })
+
+        viewModel.resultUpcomingMovie.observe(this, Observer {
             it?.let {
                 handleStatePopularMovie(it)
             }
@@ -103,7 +127,16 @@ class MainActivity : BaseActivity() {
         viewModel = ViewModelProviders.of(this, viewModelFactory)[MainViewModel::class.java]
     }
 
+    private fun showFilterBottomSheet() {
+        val bottomSheet = FilterBottomSheetDialogFragment().newInstance()
+        bottomSheet?.show(supportFragmentManager, FilterBottomSheetDialogFragment.TAG)
+    }
+
     override fun initInjector() {
         (application as BaseApplication).appComponent.inject(this)
+    }
+
+    override fun onItemClick(item: MovieFilter?) {
+        viewModel.getMovie(item ?: MovieFilter.POPULAR)
     }
 }

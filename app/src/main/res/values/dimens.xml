@@ -10,4 +10,6 @@
     <dimen name="dimen_3">3dp</dimen>
     <dimen name="dimen_36">36dp</dimen>
     <dimen name="font_size_14">14sp</dimen>
+    <dimen name="bottom_sheet_corner_radius">16dp</dimen>
+    <dimen name="bottom_sheet_top_padding">8dp</dimen>
 </resources>

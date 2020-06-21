@@ -5,4 +5,8 @@
     <string name="ex_overview">Raj is a rich, carefree, happy-go-lucky second generation NRI. Simran is the daughter of Chaudhary Baldev Singh, who in spite of being an NRI is very strict about adherence to Indian values. Simran has left for India to be married to her childhood fiancé. Raj leaves for India with a mission at his hands, to claim his lady love under the noses of her whole family. Thus begins a saga.</string>
     <string name="message_error_no_internet">Oops, Your internet is loss.</string>
     <string name="message_error_no_internet_body">"Please check your internet connect "</string>
+    <string name="popular_movie">Popular Movie</string>
+    <string name="upcoming">Upcoming</string>
+    <string name="top_rated">Top Rated</string>
+    <string name="now_playing">Now Playing</string>
 </resources>
