@@ -13,6 +13,9 @@ android {
         targetSdkVersion Releases.targetSdkVersion
         versionCode Releases.versionCode
         versionName Releases.versionName
+        buildConfigField("String", "API_KEY", movieApiKey)
+        buildConfigField("String", "MOVIE_URL", movieApiUrl)
+        buildConfigField("String", "IMAGE_URL", movieImageUrl)
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -23,11 +26,18 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+
+    implementation project(Modules.core)
 
     //Android Support
     implementation AndroidSupport.coreKtx
@@ -36,6 +46,13 @@ dependencies {
     implementation AndroidSupport.design
     implementation AndroidSupport.recyclerview
     implementation AndroidSupport.cardView
+
+    //networking
+    implementation Retrofit.retrofit
+    implementation Retrofit.gson
+    implementation Retrofit.gsonConverter
+    implementation Retrofit.okHttpLogging
+    implementation Retrofit.coroutinesAdapter
 
     //dagger
     implementation Dagger.dagger

@@ -42,6 +42,13 @@ object Version {
     const val glide = "4.11.0"
 
     /**
+     * Retrofit Network version
+     */
+    const val retrofit2 = "2.7.1"
+    const val gson = "2.8.6"
+    const val okhttpLogging = "3.8.1"
+
+    /**
      * Test
      */
     const val junitVersion = "4.13"
@@ -76,6 +83,14 @@ object Coroutines{
 object Glide{
     const val glide = "com.github.bumptech.glide:glide:${Version.glide}"
     const val glideCompiler = "com.github.bumptech.glide:compiler:${Version.glide}"
+}
+
+object Retrofit {
+    const val retrofit = "com.squareup.retrofit2:retrofit:${Version.retrofit2}"
+    const val gsonConverter = "com.squareup.retrofit2:converter-gson:${Version.retrofit2}"
+    const val gson = "com.google.code.gson:gson:${Version.gson}"
+    const val okHttpLogging = "com.squareup.okhttp3:logging-interceptor:${Version.okhttpLogging}"
+    const val coroutinesAdapter = "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:${Version.coroutinesAdapter}"
 }
 
 object Test{
