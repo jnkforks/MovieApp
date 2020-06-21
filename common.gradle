@@ -19,4 +19,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation Dagger.dagger
+    kapt Dagger.daggerCompiler
 }

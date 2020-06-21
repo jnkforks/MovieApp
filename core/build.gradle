@@ -7,6 +7,10 @@ dependencies{
     implementation AndroidSupport.appCompat
     implementation AndroidSupport.constraintLayout
 
+    /*Glide*/
+    implementation Glide.glide
+    kapt Glide.glideCompiler
+
     /*Coroutine*/
     implementation Coroutines.core
     implementation Coroutines.android

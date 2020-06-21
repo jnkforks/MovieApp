@@ -1,4 +1,4 @@
-package com.anggitprayogo.core.activity
+package com.anggitprayogo.core.base
 
 import androidx.appcompat.app.AppCompatActivity
 

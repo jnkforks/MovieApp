@@ -37,6 +37,10 @@ dependencies {
     implementation AndroidSupport.recyclerview
     implementation AndroidSupport.cardView
 
+    //dagger
+    implementation Dagger.dagger
+    kapt Dagger.daggerCompiler
+
     //Test
     testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'

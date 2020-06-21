@@ -32,6 +32,16 @@ object Version {
     const val coroutinesAdapter = "0.9.2"
 
     /**
+     * Dagger
+     */
+    const val dagger = "2.27"
+
+    /**
+     * Glide
+     */
+    const val glide = "4.11.0"
+
+    /**
      * Test
      */
     const val junitVersion = "4.13"
@@ -52,10 +62,20 @@ object AndroidSupport{
     const val coreKtx = "androidx.core:core-ktx:${Version.coreKtx}"
 }
 
+object Dagger{
+    const val dagger = "com.google.dagger:dagger:${Version.dagger}"
+    const val daggerCompiler = "com.google.dagger:dagger-compiler:${Version.dagger}"
+}
+
 object Coroutines{
     const val core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Version.coroutines}"
     const val android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Version.coroutines}"
     const val test = "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Version.coroutines}"
+}
+
+object Glide{
+    const val glide = "com.github.bumptech.glide:glide:${Version.glide}"
+    const val glideCompiler = "com.github.bumptech.glide:compiler:${Version.glide}"
 }
 
 object Test{
