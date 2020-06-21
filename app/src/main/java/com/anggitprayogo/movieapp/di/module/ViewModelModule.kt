@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.anggitprayogo.core.util.viewmodel.ViewModelFactory
 import com.anggitprayogo.core.util.viewmodel.ViewModelKey
+import com.anggitprayogo.movieapp.feature.detail.MovieDetailViewModel
 import com.anggitprayogo.movieapp.feature.main.MainViewModel
 import dagger.Binds
 import dagger.Module
@@ -22,4 +23,9 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(MainViewModel::class)
     internal abstract fun bindMovieViewModel(viewModel: MainViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(MovieDetailViewModel::class)
+    internal abstract fun bindMovieDetailViewModel(viewModel: MovieDetailViewModel): ViewModel
 }
