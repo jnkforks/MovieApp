@@ -7,12 +7,23 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.anggitprayogo.core.base.BaseActivity
+import com.anggitprayogo.core.util.ext.load
 import com.anggitprayogo.core.util.ext.toast
 import com.anggitprayogo.movieapp.BaseApplication
 import com.anggitprayogo.movieapp.R
 import com.anggitprayogo.movieapp.data.db.entity.MovieEntity
 import com.google.android.material.appbar.AppBarLayout
 import kotlinx.android.synthetic.main.activity_favourite_detail.*
+import kotlinx.android.synthetic.main.activity_favourite_detail.appBarLayout
+import kotlinx.android.synthetic.main.activity_favourite_detail.fabFavourite
+import kotlinx.android.synthetic.main.activity_favourite_detail.ivBannerMovie
+import kotlinx.android.synthetic.main.activity_favourite_detail.ratingMovie
+import kotlinx.android.synthetic.main.activity_favourite_detail.toolbar
+import kotlinx.android.synthetic.main.activity_favourite_detail.tvImdbRating
+import kotlinx.android.synthetic.main.activity_favourite_detail.tvMovieMetaData
+import kotlinx.android.synthetic.main.activity_favourite_detail.tvMovieTitle
+import kotlinx.android.synthetic.main.activity_favourite_detail.tvOverview
+import kotlinx.android.synthetic.main.activity_movie_detail.*
 import javax.inject.Inject
 
 class FavouriteDetailActivity : BaseActivity() {
@@ -125,7 +136,7 @@ class FavouriteDetailActivity : BaseActivity() {
             ViewModelProviders.of(this, viewModelFactory)[FavouriteDetailViewModel::class.java]
     }
 
-    private fun addOrRemoveMovieAction(){
+    private fun addOrRemoveMovieAction() {
         if (favouriteActive) {
             movieEntity?.let { it1 -> viewModel.deleteMovieFromDb(it1) }
         } else {
@@ -147,7 +158,22 @@ class FavouriteDetailActivity : BaseActivity() {
                 val icon = R.drawable.ic_baseline_favorite_red_24
                 fabFavourite.setImageResource(icon)
                 menuItem.setIcon(icon)
+                bindDataToView(movieEntity)
             }
+        }
+    }
+
+    private fun bindDataToView(result: MovieEntity?) {
+        movieEntity?.let { movie ->
+            ivBannerMovie.load(movie.bannerUrl ?: "")
+            tvMovieMetaData.text = movie.genres
+            tvMovieTitle.text = movie.title
+            tvImdbRating.text = getString(
+                R.string.imdb_rating_template,
+                (movie.vote?.toFloat() ?: 0.0).toString()
+            )
+            ratingMovie.rating = movie.vote?.toFloat() ?: 0f
+            tvOverview.text = movie.overview
         }
     }
 

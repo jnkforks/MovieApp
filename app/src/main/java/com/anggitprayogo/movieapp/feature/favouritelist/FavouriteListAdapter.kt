@@ -9,6 +9,7 @@ import com.anggitprayogo.core.util.ext.load
 import com.anggitprayogo.movieapp.R
 import com.anggitprayogo.movieapp.data.db.entity.MovieEntity
 import com.anggitprayogo.movieapp.feature.detail.MovieDetailActivity
+import com.anggitprayogo.movieapp.feature.favouritedetail.FavouriteDetailActivity
 import kotlinx.android.synthetic.main.row_item_movie.view.*
 
 /**
@@ -53,7 +54,7 @@ class FavouriteListAdapter : RecyclerView.Adapter<FavouriteListAdapter.ViewHolde
             }
 
             itemView.setOnClickListener {
-                val intent = Intent(itemView.context, MovieDetailActivity::class.java).apply {
+                val intent = Intent(itemView.context, FavouriteDetailActivity::class.java).apply {
                     putExtra(MovieDetailActivity.MOVIE_ID_KEY, movie.movieId.toString())
                 }
                 itemView.context.startActivity(intent)

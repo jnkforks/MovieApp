@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.anggitprayogo.core.util.viewmodel.ViewModelFactory
 import com.anggitprayogo.core.util.viewmodel.ViewModelKey
 import com.anggitprayogo.movieapp.feature.detail.MovieDetailViewModel
+import com.anggitprayogo.movieapp.feature.favouritedetail.FavouriteDetailViewModel
 import com.anggitprayogo.movieapp.feature.favouritelist.FavouriteListViewModel
 import com.anggitprayogo.movieapp.feature.main.MainViewModel
 import dagger.Binds
@@ -34,4 +35,9 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(FavouriteListViewModel::class)
     internal abstract fun bindFavouriteListViewModel(viewModel: FavouriteListViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(FavouriteDetailViewModel::class)
+    internal abstract fun bindFavouriteDetailViewModel(viewModel: FavouriteDetailViewModel): ViewModel
 }

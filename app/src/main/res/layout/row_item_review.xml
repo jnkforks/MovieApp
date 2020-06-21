@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         tools:text="@string/ex_review_content"
         android:layout_marginTop="@dimen/dimen_7"
-        style="@style/TextAppearance.FontPathBold"
+        android:textSize="@dimen/font_size_14"
         app:layout_constraintTop_toBottomOf="@id/tvAuthor"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
