@@ -6,6 +6,7 @@ import com.anggitprayogo.movieapp.di.module.DataModule
 import com.anggitprayogo.movieapp.di.module.RoomModule
 import com.anggitprayogo.movieapp.di.module.ViewModelModule
 import com.anggitprayogo.movieapp.feature.detail.MovieDetailActivity
+import com.anggitprayogo.movieapp.feature.favouritedetail.FavouriteDetailActivity
 import com.anggitprayogo.movieapp.feature.favouritelist.FavouriteListActivity
 import com.anggitprayogo.movieapp.feature.main.MainActivity
 import dagger.BindsInstance
@@ -29,4 +30,5 @@ interface AppComponent {
     fun inject(activity: MainActivity)
     fun inject(activity: MovieDetailActivity)
     fun inject(activity: FavouriteListActivity)
+    fun inject(activity: FavouriteDetailActivity)
 }

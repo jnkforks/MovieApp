@@ -13,17 +13,7 @@ import javax.inject.Singleton
  */
 @Module
 class RoomModule {
-    //    private var appDatabase: AppDatabase
     private val mDataBaseName = "MovieApp.db"
-//
-//    init {
-//        appDatabase =
-//            Room.databaseBuilder(application, AppDatabase::class.java, mDataBaseName).build()
-//    }
-//
-//    @Singleton
-//    @Provides
-//    fun provideAppDatabase
 
     @Singleton
     @Provides

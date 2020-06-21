@@ -6,6 +6,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.anggitprayogo.core.base.BaseActivity
+import com.anggitprayogo.core.util.ext.setGone
+import com.anggitprayogo.core.util.ext.setVisible
 import com.anggitprayogo.core.util.ext.toast
 import com.anggitprayogo.movieapp.BaseApplication
 import com.anggitprayogo.movieapp.R
@@ -64,15 +66,30 @@ class FavouriteListActivity : BaseActivity() {
     }
 
     private fun handleStateResultMovies(movies: List<MovieEntity>) {
+        handleEmptyViewVisibility(movies)
         movieList.clear()
         movieList.addAll(movies)
         adapter.setItems(movieList)
-        if (movieList.isEmpty()) toast(getString(R.string.message_empty_favourite_movie_list))
+    }
+
+    private fun handleEmptyViewVisibility(movies: List<MovieEntity>) {
+        if (movies.isEmpty()) {
+            rvMovie.setGone()
+            viewEmpty.setVisible()
+        }else{
+            rvMovie.setVisible()
+            viewEmpty.setGone()
+        }
     }
 
     private fun initViewModel() {
         viewModel =
             ViewModelProviders.of(this, viewModelFactory)[FavouriteListViewModel::class.java]
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        viewModel.fetchAllMovies()
     }
 
     override fun initInjector() {
