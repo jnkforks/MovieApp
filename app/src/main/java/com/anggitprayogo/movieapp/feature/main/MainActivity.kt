@@ -128,6 +128,7 @@ class MainActivity : BaseActivity(), FilterBottomSheetDialogFragment.ItemClickLi
     private fun initRecyclerview() {
         rvMovie.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         rvMovie.adapter = mainAdapter
+        mainAdapter.setActivity(this)
     }
 
     private fun initViewModel() {

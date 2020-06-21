@@ -13,7 +13,6 @@ import com.anggitprayogo.movieapp.BaseApplication
 import com.anggitprayogo.movieapp.R
 import com.anggitprayogo.movieapp.data.db.entity.MovieEntity
 import com.google.android.material.appbar.AppBarLayout
-import kotlinx.android.synthetic.main.activity_favourite_detail.*
 import kotlinx.android.synthetic.main.activity_favourite_detail.appBarLayout
 import kotlinx.android.synthetic.main.activity_favourite_detail.fabFavourite
 import kotlinx.android.synthetic.main.activity_favourite_detail.ivBannerMovie
@@ -151,19 +150,21 @@ class FavouriteDetailActivity : BaseActivity() {
                 favouriteActive = false
                 val icon = R.drawable.ic_baseline_favorite_border_white_24
                 fabFavourite.setImageResource(icon)
+                handleBugFloatActionButton()
                 menuItem.setIcon(icon)
             } else {
                 movieEntity = result.first()
                 favouriteActive = true
                 val icon = R.drawable.ic_baseline_favorite_red_24
                 fabFavourite.setImageResource(icon)
+                handleBugFloatActionButton()
                 menuItem.setIcon(icon)
-                bindDataToView(movieEntity)
+                bindDataToView()
             }
         }
     }
 
-    private fun bindDataToView(result: MovieEntity?) {
+    private fun bindDataToView() {
         movieEntity?.let { movie ->
             ivBannerMovie.load(movie.bannerUrl ?: "")
             tvMovieMetaData.text = movie.genres
@@ -193,6 +194,11 @@ class FavouriteDetailActivity : BaseActivity() {
         }
 
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun handleBugFloatActionButton(){
+        fabFavourite.hide();
+        fabFavourite.show();
     }
 
     override fun onSupportNavigateUp(): Boolean {

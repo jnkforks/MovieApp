@@ -89,6 +89,7 @@
         android:contentDescription="@string/app_name"
         android:elevation="@dimen/dimen_3"
         android:src="@color/colorPrimary"
+        android:transitionName="imageMain"
         app:layout_constraintBottom_toBottomOf="@+id/cvMovie"
         app:layout_constraintStart_toStartOf="@+id/cvMovie"
         app:layout_constraintTop_toTopOf="parent"

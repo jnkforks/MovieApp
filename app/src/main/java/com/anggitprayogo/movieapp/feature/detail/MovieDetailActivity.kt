@@ -99,6 +99,7 @@ class MovieDetailActivity : BaseActivity() {
         val id = item.itemId
 
         if (id == R.id.action_favourite) {
+            setFavourite()
             return true
         }
 
@@ -137,21 +138,25 @@ class MovieDetailActivity : BaseActivity() {
 
     private fun initListener() {
         fabFavourite.setOnClickListener {
-            if (favouriteActive) {
-                movieEntity?.let { it1 -> viewModel.deleteMovieFromDb(it1) }
-            } else {
-                val movieEntity = MovieEntity(
-                    movieId = movieId?.toInt(),
-                    title = movieDetail?.title,
-                    genres = movieDetail?.getMetaData(),
-                    vote = movieDetail?.getImdbRating(),
-                    releaseDate = movieDetail?.releaseDate,
-                    overview = movieDetail?.overview,
-                    bannerUrl = movieDetail?.getBannerMovie(),
-                    posterUrl = movieDetail?.getPosterMovie()
-                )
-                viewModel.insertMovieToDb(movieEntity)
-            }
+           setFavourite()
+        }
+    }
+
+    private fun setFavourite(){
+        if (favouriteActive) {
+            movieEntity?.let { it1 -> viewModel.deleteMovieFromDb(it1) }
+        } else {
+            val movieEntity = MovieEntity(
+                movieId = movieId?.toInt(),
+                title = movieDetail?.title,
+                genres = movieDetail?.getMetaData(),
+                vote = movieDetail?.getImdbRating(),
+                releaseDate = movieDetail?.releaseDate,
+                overview = movieDetail?.overview,
+                bannerUrl = movieDetail?.getBannerMovie(),
+                posterUrl = movieDetail?.getPosterMovie()
+            )
+            viewModel.insertMovieToDb(movieEntity)
         }
     }
 
@@ -232,12 +237,14 @@ class MovieDetailActivity : BaseActivity() {
                 favouriteActive = false
                 val icon = R.drawable.ic_baseline_favorite_border_white_24
                 fabFavourite.setImageResource(icon)
+                handleBugFloatActionButton()
                 menuItem.setIcon(icon)
             } else {
                 movieEntity = result.first()
                 favouriteActive = true
                 val icon = R.drawable.ic_baseline_favorite_red_24
                 fabFavourite.setImageResource(icon)
+                handleBugFloatActionButton()
                 menuItem.setIcon(icon)
             }
         }
@@ -254,6 +261,11 @@ class MovieDetailActivity : BaseActivity() {
         )
         ratingMovie.rating = movie.getImdbRating()?.toFloat() ?: 0f
         tvOverview.text = movie.overview
+    }
+
+    private fun handleBugFloatActionButton(){
+        fabFavourite.hide();
+        fabFavourite.show();
     }
 
     override fun onSupportNavigateUp(): Boolean {

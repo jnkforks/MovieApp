@@ -4,6 +4,7 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.app.ActivityOptionsCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.anggitprayogo.core.util.ext.load
 import com.anggitprayogo.movieapp.R
@@ -18,10 +19,15 @@ import kotlinx.android.synthetic.main.row_item_movie.view.*
 class FavouriteListAdapter : RecyclerView.Adapter<FavouriteListAdapter.ViewHolder>() {
 
     private var items: MutableList<MovieEntity> = mutableListOf()
+    private lateinit var activity: FavouriteListActivity
 
     fun setItems(items: MutableList<MovieEntity>) {
         this.items = items
         notifyDataSetChanged()
+    }
+
+    fun setActivity(activity: FavouriteListActivity) {
+        this.activity = activity
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -31,7 +37,7 @@ class FavouriteListAdapter : RecyclerView.Adapter<FavouriteListAdapter.ViewHolde
     override fun getItemCount(): Int = items.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bindItem(items[position])
+        holder.bindItem(items[position], activity)
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -45,7 +51,10 @@ class FavouriteListAdapter : RecyclerView.Adapter<FavouriteListAdapter.ViewHolde
             }
         }
 
-        fun bindItem(movie: MovieEntity) {
+        fun bindItem(
+            movie: MovieEntity,
+            activity: FavouriteListActivity
+        ) {
             with(itemView) {
                 ivMovie.load(movie.posterUrl ?: "")
                 tvMovieTitle.text = movie.title
@@ -54,10 +63,17 @@ class FavouriteListAdapter : RecyclerView.Adapter<FavouriteListAdapter.ViewHolde
             }
 
             itemView.setOnClickListener {
+                val activityOptionsCompat: ActivityOptionsCompat =
+                    ActivityOptionsCompat.makeSceneTransitionAnimation(
+                        activity,
+                        itemView.ivMovie,
+                        "imageMain"
+                    )
+
                 val intent = Intent(itemView.context, FavouriteDetailActivity::class.java).apply {
                     putExtra(MovieDetailActivity.MOVIE_ID_KEY, movie.movieId.toString())
                 }
-                itemView.context.startActivity(intent)
+                itemView.context.startActivity(intent, activityOptionsCompat.toBundle())
             }
         }
     }

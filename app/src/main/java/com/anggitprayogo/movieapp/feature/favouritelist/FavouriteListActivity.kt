@@ -40,6 +40,7 @@ class FavouriteListActivity : BaseActivity() {
     private fun initRecyclerView() {
         rvMovie.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         rvMovie.adapter = adapter
+        adapter.setActivity(this)
     }
 
     private fun initListener() {

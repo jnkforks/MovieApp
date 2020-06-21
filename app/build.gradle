@@ -13,6 +13,7 @@ android {
         targetSdkVersion Releases.targetSdkVersion
         versionCode Releases.versionCode
         versionName Releases.versionName
+        multiDexEnabled true
         buildConfigField("String", "API_KEY", movieApiKey)
         buildConfigField("String", "MOVIE_URL", movieApiUrl)
         buildConfigField("String", "IMAGE_URL", movieImageUrl)
