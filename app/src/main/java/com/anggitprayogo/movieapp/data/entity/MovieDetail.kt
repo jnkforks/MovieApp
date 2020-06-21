@@ -1,5 +1,6 @@
 package com.anggitprayogo.movieapp.data.entity
 
+import com.anggitprayogo.movieapp.BuildConfig
 import com.google.gson.annotations.SerializedName
 
 
@@ -64,6 +65,14 @@ data class MovieDetail(
         }
         val joinedGenre = genres.map { it.name }.toList()
         return joinedGenre.joinToString(",")
+    }
+
+    fun getBannerMovie(): String {
+        return BuildConfig.IMAGE_URL + backdropPath
+    }
+
+    fun getImdbRating(): Double? {
+        return (voteAverage?.div(10.0))?.times(5.0)
     }
 }
 
