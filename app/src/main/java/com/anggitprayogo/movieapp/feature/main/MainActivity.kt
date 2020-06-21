@@ -25,6 +25,8 @@ class MainActivity : BaseActivity(), FilterBottomSheetDialogFragment.ItemClickLi
 
     private var movieList = mutableListOf<Movie>()
 
+    private var currentFilter = MovieFilter.POPULAR
+
     private val mainAdapter: MainAdapter by lazy {
         MainAdapter()
     }
@@ -41,7 +43,7 @@ class MainActivity : BaseActivity(), FilterBottomSheetDialogFragment.ItemClickLi
 
     private fun initListener() {
         swipeRefreshLayout.setOnRefreshListener {
-            viewModel.getPopularMovie()
+            viewModel.getMovie(currentFilter)
             swipeRefreshLayout.isRefreshing = false
         }
 
@@ -137,6 +139,19 @@ class MainActivity : BaseActivity(), FilterBottomSheetDialogFragment.ItemClickLi
     }
 
     override fun onItemClick(item: MovieFilter?) {
-        viewModel.getMovie(item ?: MovieFilter.POPULAR)
+        val filterSelected = item ?: MovieFilter.POPULAR
+        currentFilter = filterSelected
+        viewModel.getMovie(filterSelected)
+        changeAppTitleByFilter(filterSelected)
+    }
+
+    private fun changeAppTitleByFilter(filterSelected: MovieFilter) {
+        val appBarTitle = when (filterSelected) {
+            MovieFilter.POPULAR -> getString(R.string.popular_movie)
+            MovieFilter.NOW_PLAYING -> getString(R.string.now_playing)
+            MovieFilter.UP_COMING -> getString(R.string.upcoming)
+            MovieFilter.TOP_RATED -> getString(R.string.top_rated)
+        }
+        tvAppName.text = appBarTitle
     }
 }
