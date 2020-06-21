@@ -164,9 +164,21 @@ class MovieDetailActivity : BaseActivity() {
             }
         })
 
+        viewModel.networkError.observe(this, Observer {
+            it?.let {
+                handleStateNetworkError(it)
+            }
+        })
+
         viewModel.error.observe(this, Observer {
             toast(it)
         })
+    }
+
+    private fun handleStateNetworkError(networkError: Boolean) {
+        if(networkError){
+            toast(getString(R.string.message_error_no_internet_body))
+        }
     }
 
     private fun handleStateMovieDetailFromDb(result: List<MovieEntity>) {

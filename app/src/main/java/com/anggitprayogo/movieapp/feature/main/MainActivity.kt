@@ -1,5 +1,6 @@
 package com.anggitprayogo.movieapp.feature.main
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -13,6 +14,7 @@ import com.anggitprayogo.movieapp.BaseApplication
 import com.anggitprayogo.movieapp.R
 import com.anggitprayogo.movieapp.data.entity.Movie
 import com.anggitprayogo.movieapp.data.enum.MovieFilter
+import com.anggitprayogo.movieapp.feature.favouritelist.FavouriteListActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
@@ -48,6 +50,10 @@ class MainActivity : BaseActivity(), FilterBottomSheetDialogFragment.ItemClickLi
 
         cvFilter.setOnClickListener {
             showFilterBottomSheet()
+        }
+
+        ivFavourite.setOnClickListener {
+            startActivity(Intent(this, FavouriteListActivity::class.java))
         }
     }
 

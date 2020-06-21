@@ -75,6 +75,11 @@ object Version {
     const val viewPump = "2.0.3"
 
     /**
+     * Stheto
+     */
+    const val stheto = "1.5.1"
+
+    /**
      * Test
      */
     const val junitVersion = "4.13"
@@ -143,6 +148,10 @@ object Lottie {
 object FontAdapter {
     const val calligraphy = "io.github.inflationx:calligraphy3:${Version.calligraphy}"
     const val viewPump = "io.github.inflationx:viewpump:${Version.viewPump}"
+}
+
+object Stheto{
+    const val stheto = "com.facebook.stetho:stetho:${Version.stheto}"
 }
 
 object Test {
