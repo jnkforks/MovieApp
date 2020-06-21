@@ -1,4 +1,6 @@
 package com.anggitprayogo.movieapp.data.entity
+
+import com.anggitprayogo.movieapp.BuildConfig
 import com.google.gson.annotations.SerializedName
 
 
@@ -54,4 +56,8 @@ data class Movie(
     val voteAverage: Double?,
     @SerializedName("vote_count")
     val voteCount: Int?
-)
+) {
+    fun getPoster(): String {
+        return BuildConfig.IMAGE_URL + posterPath
+    }
+}
