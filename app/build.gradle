@@ -64,6 +64,10 @@ dependencies {
     //Lottie
     implementation Lottie.lottie
 
+    //Font Adapter
+    implementation FontAdapter.calligraphy
+    implementation FontAdapter.viewPump
+
     //dagger
     implementation Dagger.dagger
     kapt Dagger.daggerCompiler

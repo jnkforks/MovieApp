@@ -5,15 +5,19 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/colorWhite"
-    android:padding="@dimen/dimen_16">
+    android:paddingTop="@dimen/dimen_16">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cvMovie"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_16"
         android:layout_marginTop="@dimen/dimen_24"
+        android:layout_marginEnd="@dimen/dimen_16"
+        android:layout_marginBottom="@dimen/dimen_16"
         android:minHeight="@dimen/dimen_150"
-        app:cardCornerRadius="@dimen/dimen_7"
+        app:cardCornerRadius="@dimen/dimen_10"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -34,7 +38,7 @@
                 android:maxLines="2"
                 android:textColor="@color/colorBlack"
                 android:textSize="@dimen/font_size_16"
-                android:textStyle="bold"
+                style="@style/TextAppearance.FontPathBold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"

@@ -11,6 +11,10 @@ dependencies{
     implementation Glide.glide
     kapt Glide.glideCompiler
 
+    /*Font Adapter*/
+    implementation FontAdapter.calligraphy
+    implementation FontAdapter.viewPump
+
     /*Coroutine*/
     implementation Coroutines.core
     implementation Coroutines.android

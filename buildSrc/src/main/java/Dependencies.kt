@@ -64,6 +64,12 @@ object Version {
     const val lottie = "2.8.0"
 
     /**
+     * Font Adapter
+     */
+    const val calligraphy = "3.1.1"
+    const val viewPump = "2.0.3"
+
+    /**
      * Test
      */
     const val junitVersion = "4.13"
@@ -75,32 +81,33 @@ object Version {
     const val mockitoInline = "2.19.0"
 }
 
-object AndroidSupport{
+object AndroidSupport {
     const val appCompat = "androidx.appcompat:appcompat:${Version.support}"
     const val recyclerview = "androidx.recyclerview:recyclerview:${Version.cardAndRv}"
     const val cardView = "androidx.cardview:cardview:${Version.cardAndRv}"
     const val design = "com.google.android.material:material:${Version.material}"
-    const val constraintLayout = "androidx.constraintlayout:constraintlayout:${Version.constraintLayout}"
+    const val constraintLayout =
+        "androidx.constraintlayout:constraintlayout:${Version.constraintLayout}"
     const val coreKtx = "androidx.core:core-ktx:${Version.coreKtx}"
 }
 
-object Dagger{
+object Dagger {
     const val dagger = "com.google.dagger:dagger:${Version.dagger}"
     const val daggerCompiler = "com.google.dagger:dagger-compiler:${Version.dagger}"
 }
 
-object Jetpack{
+object Jetpack {
     const val lifecycle = "androidx.lifecycle:lifecycle-extensions:${Version.archLifecycle}"
     const val lifecycleCompiler = "androidx.lifecycle:lifecycle-compiler:${Version.archLifecycle}"
 }
 
-object Coroutines{
+object Coroutines {
     const val core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Version.coroutines}"
     const val android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Version.coroutines}"
     const val test = "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Version.coroutines}"
 }
 
-object Glide{
+object Glide {
     const val glide = "com.github.bumptech.glide:glide:${Version.glide}"
     const val glideCompiler = "com.github.bumptech.glide:compiler:${Version.glide}"
 }
@@ -110,18 +117,24 @@ object Retrofit {
     const val gsonConverter = "com.squareup.retrofit2:converter-gson:${Version.retrofit2}"
     const val gson = "com.google.code.gson:gson:${Version.gson}"
     const val okHttpLogging = "com.squareup.okhttp3:logging-interceptor:${Version.okhttpLogging}"
-    const val coroutinesAdapter = "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:${Version.coroutinesAdapter}"
+    const val coroutinesAdapter =
+        "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:${Version.coroutinesAdapter}"
 }
 
-object Shimmer{
+object Shimmer {
     const val shimmer = "com.facebook.shimmer:shimmer:${Version.shimmer}"
 }
 
-object Lottie{
+object Lottie {
     const val lottie = "com.airbnb.android:lottie:${Version.lottie}"
 }
 
-object Test{
+object FontAdapter {
+    const val calligraphy = "io.github.inflationx:calligraphy3:${Version.calligraphy}"
+    const val viewPump = "io.github.inflationx:viewpump:${Version.viewPump}"
+}
+
+object Test {
     const val junit = "junit:junit:${Version.junitVersion}"
     const val junitExt = "androidx.test.ext:junit:${Version.junitExt}"
     const val mockitoCore = "org.mockito:mockito-core:${Version.mockitoCore}"
