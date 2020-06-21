@@ -42,11 +42,26 @@ object Version {
     const val glide = "4.11.0"
 
     /**
+     * Jetpack
+     */
+    const val archLifecycle = "2.0.0"
+
+    /**
      * Retrofit Network version
      */
     const val retrofit2 = "2.7.1"
     const val gson = "2.8.6"
     const val okhttpLogging = "3.8.1"
+
+    /**
+     * Shimmer
+     */
+    const val shimmer = "0.5.0"
+
+    /**
+     * Lottie
+     */
+    const val lottie = "2.8.0"
 
     /**
      * Test
@@ -74,6 +89,11 @@ object Dagger{
     const val daggerCompiler = "com.google.dagger:dagger-compiler:${Version.dagger}"
 }
 
+object Jetpack{
+    const val lifecycle = "androidx.lifecycle:lifecycle-extensions:${Version.archLifecycle}"
+    const val lifecycleCompiler = "androidx.lifecycle:lifecycle-compiler:${Version.archLifecycle}"
+}
+
 object Coroutines{
     const val core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Version.coroutines}"
     const val android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Version.coroutines}"
@@ -91,6 +111,14 @@ object Retrofit {
     const val gson = "com.google.code.gson:gson:${Version.gson}"
     const val okHttpLogging = "com.squareup.okhttp3:logging-interceptor:${Version.okhttpLogging}"
     const val coroutinesAdapter = "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:${Version.coroutinesAdapter}"
+}
+
+object Shimmer{
+    const val shimmer = "com.facebook.shimmer:shimmer:${Version.shimmer}"
+}
+
+object Lottie{
+    const val lottie = "com.airbnb.android:lottie:${Version.lottie}"
 }
 
 object Test{

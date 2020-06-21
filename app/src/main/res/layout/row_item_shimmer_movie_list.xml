@@ -31,6 +31,7 @@
                 android:id="@+id/tvMovieTitle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:background="@color/colorShimmer"
                 android:maxLines="2"
                 android:textColor="@color/colorBlack"
                 android:textSize="@dimen/font_size_16"
@@ -45,6 +46,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dimen_7"
+                android:background="@color/colorShimmer"
                 android:textSize="@dimen/font_size_14"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -53,20 +55,23 @@
 
             <TextView
                 android:id="@+id/tvHeaderOverview"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dimen_10"
-                android:text="@string/overview"
+                android:background="@color/colorShimmer"
                 android:textColor="@color/colorBlack"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvReleaseDate" />
+                app:layout_constraintTop_toBottomOf="@id/tvReleaseDate"
+                tools:text="@string/overview" />
 
             <TextView
                 android:id="@+id/tvOverview"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dimen_3"
+                android:background="@color/colorShimmer"
                 android:maxLines="3"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -84,7 +89,7 @@
         android:layout_marginStart="@dimen/dimen_16"
         android:contentDescription="@string/app_name"
         android:elevation="@dimen/dimen_3"
-        android:src="@color/colorPrimary"
+        android:src="@color/colorShimmer"
         app:layout_constraintBottom_toBottomOf="@+id/cvMovie"
         app:layout_constraintStart_toStartOf="@+id/cvMovie"
         app:layout_constraintTop_toTopOf="parent"

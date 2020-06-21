@@ -16,17 +16,17 @@ import javax.inject.Inject
 /**
  * Created by Anggit Prayogo on 6/21/20.
  */
-//interface MainViewModelContract {
-//    fun getPopularMovie()
-//    fun getTopRatedMovie()
-//    fun getPlayingNowMovie()
-//    fun getUpcomingMovie()
-//}
+interface MainViewModelContract {
+    fun getPopularMovie()
+    fun getTopRatedMovie()
+    fun getPlayingNowMovie()
+    fun getUpcomingMovie()
+}
 
 class MainViewModel @Inject constructor(
     private val useCase: MovieUseCase,
     dispatcher: SchedulerProvider
-) : BaseViewModel(dispatcher) {
+) : BaseViewModel(dispatcher), MainViewModelContract {
 
     /**
      * Loader State
@@ -83,7 +83,7 @@ class MainViewModel @Inject constructor(
         getPopularMovie()
     }
 
-    fun getPopularMovie() {
+    override fun getPopularMovie() {
         _state.value = LoaderState.ShowLoading
         launch {
             val result = useCase.getPopularMovie()
@@ -104,7 +104,7 @@ class MainViewModel @Inject constructor(
         }
     }
 
-    fun getTopRatedMovie() {
+    override fun getTopRatedMovie() {
         _state.value = LoaderState.ShowLoading
         launch {
             val result = useCase.getTopRatedMovie()
@@ -125,7 +125,7 @@ class MainViewModel @Inject constructor(
         }
     }
 
-    fun getPlayingNowMovie() {
+    override fun getPlayingNowMovie() {
         _state.value = LoaderState.ShowLoading
         launch {
             val result = useCase.getNowPlayingMovie()
@@ -146,7 +146,7 @@ class MainViewModel @Inject constructor(
         }
     }
 
-    fun getUpcomingMovie() {
+    override fun getUpcomingMovie() {
         _state.value = LoaderState.ShowLoading
         launch {
             val result = useCase.getUpcomingMovie()

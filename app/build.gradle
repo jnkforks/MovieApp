@@ -54,6 +54,16 @@ dependencies {
     implementation Retrofit.okHttpLogging
     implementation Retrofit.coroutinesAdapter
 
+    //Jetpack
+    implementation Jetpack.lifecycle
+    kapt Jetpack.lifecycleCompiler
+
+    //Shimmer
+    implementation Shimmer.shimmer
+
+    //Lottie
+    implementation Lottie.lottie
+
     //dagger
     implementation Dagger.dagger
     kapt Dagger.daggerCompiler
