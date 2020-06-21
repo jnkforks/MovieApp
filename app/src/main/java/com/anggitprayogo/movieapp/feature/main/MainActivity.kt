@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.anggitprayogo.core.base.BaseActivity
 import com.anggitprayogo.core.util.ext.setGone
 import com.anggitprayogo.core.util.ext.setVisible
-import com.anggitprayogo.core.util.ext.toast
 import com.anggitprayogo.core.util.state.LoaderState
 import com.anggitprayogo.movieapp.BaseApplication
 import com.anggitprayogo.movieapp.R

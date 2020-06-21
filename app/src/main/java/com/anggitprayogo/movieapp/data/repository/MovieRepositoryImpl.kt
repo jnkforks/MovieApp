@@ -1,5 +1,7 @@
 package com.anggitprayogo.movieapp.data.repository
 
+import com.anggitprayogo.movieapp.data.db.dao.MovieDao
+import com.anggitprayogo.movieapp.data.db.entity.MovieEntity
 import com.anggitprayogo.movieapp.data.entity.MovieDetail
 import com.anggitprayogo.movieapp.data.entity.Movies
 import com.anggitprayogo.movieapp.data.routes.NetworkService
@@ -7,7 +9,8 @@ import retrofit2.Response
 import javax.inject.Inject
 
 class MovieRepositoryImpl @Inject constructor(
-    private val service: NetworkService
+    private val service: NetworkService,
+    private val movieDao: MovieDao
 ) : MovieRepository {
 
     override suspend fun getPopularMovie(): Response<Movies> {
@@ -28,5 +31,17 @@ class MovieRepositoryImpl @Inject constructor(
 
     override suspend fun getDetailMovie(movieId: String): Response<MovieDetail> {
         return service.getDetailMovie(movieId)
+    }
+
+    override suspend fun fetchAllMoviesDao(): List<MovieEntity> {
+        return movieDao.fetchAllMovies()
+    }
+
+    override suspend fun fetchMovieByMovieId(movieId: Int): MovieEntity {
+        return movieDao.fetchMovieByMovieId(movieId)
+    }
+
+    override suspend fun insertMovie(movieEntity: MovieEntity) {
+        return movieDao.insertMovie(movieEntity)
     }
 }

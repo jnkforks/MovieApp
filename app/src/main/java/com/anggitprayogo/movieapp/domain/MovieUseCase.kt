@@ -2,6 +2,7 @@ package com.anggitprayogo.movieapp.domain
 
 import com.anggitprayogo.core.util.ext.safeApiCall
 import com.anggitprayogo.core.util.state.ResultState
+import com.anggitprayogo.movieapp.data.db.entity.MovieEntity
 import com.anggitprayogo.movieapp.data.entity.MovieDetail
 import com.anggitprayogo.movieapp.data.entity.Movies
 import com.anggitprayogo.movieapp.data.repository.MovieRepository
@@ -66,6 +67,36 @@ class MovieUseCase @Inject constructor(
             } catch (e: Exception) {
                 ResultState.Error("", response.code())
             }
+        }
+    }
+
+
+    /**
+     * Local Db Movie Dao
+     */
+    suspend fun getFavouriteMovie(): ResultState<List<MovieEntity>> {
+        return try {
+            val response = movieRepository.fetchAllMoviesDao()
+            ResultState.Success(response)
+        } catch (e: Exception) {
+            ResultState.Error(e.localizedMessage, 500)
+        }
+    }
+
+    suspend fun getMovieDetailByMovieId(movieId: Int): ResultState<MovieEntity> {
+        return try {
+            val response = movieRepository.fetchMovieByMovieId(movieId)
+            ResultState.Success(response)
+        } catch (e: Exception) {
+            ResultState.Error(e.localizedMessage, 500)
+        }
+    }
+
+    suspend fun insertMovieToDb(movieEntity: MovieEntity) {
+        try {
+            movieRepository.insertMovie(movieEntity)
+        } catch (e: Exception) {
+            throw Exception(e)
         }
     }
 }

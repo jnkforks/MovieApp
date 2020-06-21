@@ -54,6 +54,11 @@ object Version {
     const val okhttpLogging = "3.8.1"
 
     /**
+     * Room
+     */
+    const val room = "2.2.5"
+
+    /**
      * Shimmer
      */
     const val shimmer = "0.5.0"
@@ -119,6 +124,12 @@ object Retrofit {
     const val okHttpLogging = "com.squareup.okhttp3:logging-interceptor:${Version.okhttpLogging}"
     const val coroutinesAdapter =
         "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:${Version.coroutinesAdapter}"
+}
+
+object Room{
+    const val room = "androidx.room:room-runtime:${Version.room}"
+    const val roomCompiler = "androidx.room:room-compiler:${Version.room}"
+    const val roomKtx = "androidx.room:room-ktx:${Version.room}"
 }
 
 object Shimmer {
