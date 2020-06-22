@@ -2,17 +2,18 @@
 <androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/motionLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layoutDescription="@xml/activity_splash_screen_scene"
     tools:context=".feature.splash.SplashScreenActivity">
 
     <ImageView
-        android:id="@+id/ivLogo"
+        android:id="@+id/imageView"
         android:layout_width="@dimen/dimen_128"
         android:layout_height="@dimen/dimen_128"
         android:contentDescription="@string/app_name"
-        android:src="@drawable/ic_twitter_logo_blue"
+        android:src="@drawable/ic_baseline_local_movies_24"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
