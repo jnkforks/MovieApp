@@ -22,7 +22,7 @@ object Version {
     const val support = "1.1.0"
     const val material = "1.0.0"
     const val cardAndRv = "1.0.0"
-    const val constraintLayout = "1.1.3"
+    const val constraintLayout = "2.0.0-beta7"
     const val coreKtx = "1.3.0"
 
     /**

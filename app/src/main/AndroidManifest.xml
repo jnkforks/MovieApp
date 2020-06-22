@@ -12,16 +12,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".feature.favouritedetail.FavouriteDetailActivity"></activity>
-        <activity android:name=".feature.favouritelist.FavouriteListActivity" />
-        <activity android:name=".feature.detail.MovieDetailActivity" />
-        <activity android:name=".feature.main.MainActivity">
+        <activity android:name=".feature.splash.SplashScreenActivity" android:theme="@style/AppTheme.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".feature.favouritedetail.FavouriteDetailActivity" />
+        <activity android:name=".feature.favouritelist.FavouriteListActivity" />
+        <activity android:name=".feature.detail.MovieDetailActivity" />
+        <activity android:name=".feature.main.MainActivity"/>
     </application>
 
 </manifest>

@@ -9,6 +9,7 @@ import com.anggitprayogo.movieapp.feature.detail.MovieDetailActivity
 import com.anggitprayogo.movieapp.feature.favouritedetail.FavouriteDetailActivity
 import com.anggitprayogo.movieapp.feature.favouritelist.FavouriteListActivity
 import com.anggitprayogo.movieapp.feature.main.MainActivity
+import com.anggitprayogo.movieapp.feature.splash.SplashScreenActivity
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
@@ -31,4 +32,5 @@ interface AppComponent {
     fun inject(activity: MovieDetailActivity)
     fun inject(activity: FavouriteListActivity)
     fun inject(activity: FavouriteDetailActivity)
+    fun inject(activity: SplashScreenActivity)
 }
