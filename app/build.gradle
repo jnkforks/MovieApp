@@ -60,14 +60,13 @@ dependencies {
 
     //Room
     implementation Room.room
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     kapt Room.roomCompiler
     implementation Room.roomKtx
 
     //Jetpack
     implementation Jetpack.lifecycle
     kapt Jetpack.lifecycleCompiler
+    implementation Jetpack.appInitializer
 
     //Shimmer
     implementation Shimmer.shimmer

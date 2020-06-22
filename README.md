@@ -15,6 +15,7 @@ Movie DB App uses a number of open source projects and propose architecture to w
 * Clean Architecture - Practical Software Architecture Solutions from the Legendary Robert C. Martin (“Uncle Bob”) By applying universal rules of software architecture
 * Unit Test - Make your code safer
 * Motion Layout - Easier to animate your layout
+* AppInitializer - a straightforward, performant way to initialize components at application startup.
 * And More..
 
 And of course Movie Db App itself is open source with a public repo

@@ -1,10 +1,11 @@
 package com.anggitprayogo.movieapp
 
 import android.app.Application
+import androidx.startup.AppInitializer
 import com.anggitprayogo.core.config.FontConfig
 import com.anggitprayogo.movieapp.di.AppComponent
 import com.anggitprayogo.movieapp.di.DaggerAppComponent
-import com.facebook.stetho.Stetho
+import com.anggitprayogo.movieapp.initializer.SthetoInitializer
 import io.github.inflationx.calligraphy3.CalligraphyConfig
 import io.github.inflationx.calligraphy3.CalligraphyInterceptor
 import io.github.inflationx.viewpump.ViewPump
@@ -20,8 +21,9 @@ class BaseApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        AppInitializer.getInstance(this)
+            .initializeComponent(SthetoInitializer::class.java)
         initFont()
-        initStheto()
     }
 
     private fun initFont() {
@@ -37,9 +39,5 @@ class BaseApplication : Application() {
                 )
                 .build()
         )
-    }
-
-    private fun initStheto(){
-        Stetho.initializeWithDefaults(this)
     }
 }
