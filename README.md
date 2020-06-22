@@ -14,6 +14,7 @@ Movie DB App uses a number of open source projects and propose architecture to w
 * MVVM - a structural design pattern that separates objects into three distinct groups: Models hold application data
 * Clean Architecture - Practical Software Architecture Solutions from the Legendary Robert C. Martin (“Uncle Bob”) By applying universal rules of software architecture
 * Unit Test - Make your code safer
+* Motion Layout - Easier to animate your layout
 * And More..
 
 And of course Movie Db App itself is open source with a public repo
