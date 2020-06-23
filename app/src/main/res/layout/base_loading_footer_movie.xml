@@ -16,12 +16,7 @@
         android:textSize="@dimen/font_size_14"
         tools:text="@string/message_error_footer_movie" />
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        style="?android:attr/progressBarStyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center" />
+    <include android:id="@+id/viewLoadingFooter" layout="@layout/row_item_loading_footer_movie"/>
 
     <Button
         android:id="@+id/retryButton"

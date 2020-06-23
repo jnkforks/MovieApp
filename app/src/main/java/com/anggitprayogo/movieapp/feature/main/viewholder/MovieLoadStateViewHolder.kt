@@ -41,7 +41,7 @@ class MovieLoadStateViewHolder(
             if (loadState is LoadState.Error) {
                 errorMsg.text = loadState.error.localizedMessage
             }
-            progressBar.isVisible = loadState is LoadState.Loading
+            viewLoadingFooter.isVisible = loadState is LoadState.Loading
             retryButton.isVisible = loadState !is LoadState.Loading
             errorMsg.isVisible = loadState !is LoadState.Loading
         }
