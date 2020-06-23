@@ -15,7 +15,6 @@ import com.anggitprayogo.core.util.state.LoaderState
 import com.anggitprayogo.movieapp.BaseApplication
 import com.anggitprayogo.movieapp.R
 import com.anggitprayogo.movieapp.data.enum.MovieFilter
-import com.anggitprayogo.movieapp.data.remote.entity.Movie
 import com.anggitprayogo.movieapp.feature.favouritelist.FavouriteListActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -32,15 +31,9 @@ class MainActivity : BaseActivity(), FilterBottomSheetDialogFragment.ItemClickLi
     lateinit var viewModelFactory: ViewModelProvider.Factory
     lateinit var viewModel: MainViewModel
 
-    private var movieList = mutableListOf<Movie>()
-
     private var currentFilter = MovieFilter.POPULAR
 
     private var job: Job? = null
-
-    private val mainAdapter: MainAdapter by lazy {
-        MainAdapter()
-    }
 
     private val adapter: MainPagingAdapter by lazy {
         MainPagingAdapter()
@@ -54,13 +47,14 @@ class MainActivity : BaseActivity(), FilterBottomSheetDialogFragment.ItemClickLi
         initRecyclerview()
         initObserver()
         initListener()
+        fetchData()
         initFetchData()
     }
 
     private fun fetchData() {
         job?.cancel()
         job = lifecycleScope.launch {
-            viewModel.getMoviesPaginSource(currentFilter).collectLatest {
+            viewModel.getMovies(currentFilter).collectLatest {
                 adapter.submitData(it)
             }
         }
@@ -97,12 +91,6 @@ class MainActivity : BaseActivity(), FilterBottomSheetDialogFragment.ItemClickLi
             }
         })
 
-        viewModel.resultMovies.observe(this, Observer {
-            it?.let {
-                handleStatePopularMovie(it)
-            }
-        })
-
         viewModel.networkError.observe(this, Observer {
             it?.let {
                 handleStateInternet(it)
@@ -120,12 +108,6 @@ class MainActivity : BaseActivity(), FilterBottomSheetDialogFragment.ItemClickLi
             viewErrorConnection.setGone()
             rvMovie.setVisible()
         }
-    }
-
-    private fun handleStatePopularMovie(results: List<Movie>) {
-        movieList.clear()
-        movieList.addAll(results)
-        mainAdapter.setItems(movieList)
     }
 
     private fun handleStateLoading(loading: LoaderState) {
@@ -162,7 +144,7 @@ class MainActivity : BaseActivity(), FilterBottomSheetDialogFragment.ItemClickLi
     override fun onItemClick(item: MovieFilter?) {
         val filterSelected = item ?: MovieFilter.POPULAR
         currentFilter = filterSelected
-        viewModel.getMovies(filterSelected)
+        fetchData()
         changeAppTitleByFilter(filterSelected)
     }
 

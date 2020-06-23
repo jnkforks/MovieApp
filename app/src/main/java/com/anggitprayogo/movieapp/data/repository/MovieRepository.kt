@@ -25,14 +25,6 @@ interface MovieRepository {
 
     fun getTopRatedMoviePagingSource(): Flow<PagingData<Movie>>
 
-    suspend fun getPopularMovie(): Response<Movies>
-
-    suspend fun getUpcomingMovie(): Response<Movies>
-
-    suspend fun getNowPlayingMovie(): Response<Movies>
-
-    suspend fun getTopRated(): Response<Movies>
-
     suspend fun getDetailMovie(movieId: String): Response<MovieDetail>
 
     suspend fun getMovieReviewsByMovieId(movieId: String): Response<MovieReviews>

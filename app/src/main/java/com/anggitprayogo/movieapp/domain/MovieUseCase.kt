@@ -36,26 +36,6 @@ class MovieUseCase @Inject constructor(
         }
     }
 
-    suspend fun getMoviesByType(movieFilter: MovieFilter): ResultState<Movies> {
-        return safeApiCall {
-            val response = fetchMovieByType(movieFilter)
-            try {
-                ResultState.Success(response.body()!!)
-            } catch (e: Exception) {
-                ResultState.Error(e.localizedMessage, response.code())
-            }
-        }
-    }
-
-    private suspend fun fetchMovieByType(movieFilter: MovieFilter): Response<Movies> {
-        return when (movieFilter) {
-            MovieFilter.POPULAR -> movieRepository.getPopularMovie()
-            MovieFilter.NOW_PLAYING -> movieRepository.getNowPlayingMovie()
-            MovieFilter.UP_COMING -> movieRepository.getUpcomingMovie()
-            MovieFilter.TOP_RATED -> movieRepository.getTopRated()
-        }
-    }
-
     suspend fun getMovieDetail(movieId: String): ResultState<MovieDetail> {
         return safeApiCall {
             val response = movieRepository.getDetailMovie(movieId)

@@ -48,22 +48,6 @@ class MovieRepositoryImpl @Inject constructor(
         ).flow
     }
 
-    override suspend fun getPopularMovie(): Response<Movies> {
-        return service.getPopularMovie(PaginConfig.MOVIE_DB_PAGING_STARTING_INDEX.toString())
-    }
-
-    override suspend fun getUpcomingMovie(): Response<Movies> {
-        return service.getUpcomingMovie(PaginConfig.MOVIE_DB_PAGING_STARTING_INDEX.toString())
-    }
-
-    override suspend fun getNowPlayingMovie(): Response<Movies> {
-        return service.getNowPlayingMovie(PaginConfig.MOVIE_DB_PAGING_STARTING_INDEX.toString())
-    }
-
-    override suspend fun getTopRated(): Response<Movies> {
-        return service.getTopRated(PaginConfig.MOVIE_DB_PAGING_STARTING_INDEX.toString())
-    }
-
     override suspend fun getDetailMovie(movieId: String): Response<MovieDetail> {
         return service.getDetailMovie(movieId)
     }
