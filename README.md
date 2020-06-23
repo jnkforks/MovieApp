@@ -18,6 +18,9 @@ Movie DB App uses a number of open source projects and propose architecture to w
 * AppInitializer - a straightforward, performant way to initialize components at application startup.
 * And More..
 
+More Tech Stack Implementation in another branch
+* Paging => https://github.com/anggit97/MovieApp/tree/paging
+
 And of course Movie Db App itself is open source with a public repo
  on GitHub.
 
