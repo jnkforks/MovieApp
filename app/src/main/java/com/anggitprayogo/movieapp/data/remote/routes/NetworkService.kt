@@ -6,6 +6,7 @@ import com.anggitprayogo.movieapp.data.remote.entity.Movies
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 /**
  * Created by Anggit Prayogo on 6/21/20.
@@ -13,16 +14,16 @@ import retrofit2.http.Path
 interface NetworkService {
 
     @GET("movie/popular")
-    suspend fun getPopularMovie(): Response<Movies>
+    suspend fun getPopularMovie(@Query("page") page: String): Response<Movies>
 
     @GET("movie/upcoming")
-    suspend fun getUpcomingMovie(): Response<Movies>
+    suspend fun getUpcomingMovie(@Query("page") page: String): Response<Movies>
 
     @GET("movie/now_playing")
-    suspend fun getNowPlayingMovie(): Response<Movies>
+    suspend fun getNowPlayingMovie(@Query("page") page: String): Response<Movies>
 
     @GET("movie/top_rated")
-    suspend fun getTopRated(): Response<Movies>
+    suspend fun getTopRated(@Query("page") page: String): Response<Movies>
 
     @GET("movie/{movie_id}")
     suspend fun getDetailMovie(@Path("movie_id") movieId: String): Response<MovieDetail>

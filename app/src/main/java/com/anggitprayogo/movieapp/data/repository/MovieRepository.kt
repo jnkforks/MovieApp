@@ -1,9 +1,12 @@
 package com.anggitprayogo.movieapp.data.repository
 
+import androidx.paging.PagingData
 import com.anggitprayogo.movieapp.data.local.entity.MovieEntity
+import com.anggitprayogo.movieapp.data.remote.entity.Movie
 import com.anggitprayogo.movieapp.data.remote.entity.MovieDetail
 import com.anggitprayogo.movieapp.data.remote.entity.MovieReviews
 import com.anggitprayogo.movieapp.data.remote.entity.Movies
+import kotlinx.coroutines.flow.Flow
 import retrofit2.Response
 
 /**
@@ -14,6 +17,14 @@ interface MovieRepository {
     /**
      * Remote
      */
+    fun getPopularMoviePagingSource(): Flow<PagingData<Movie>>
+
+    fun getUpcomingMoviePagingSource(): Flow<PagingData<Movie>>
+
+    fun getNowPlayingMoviePagingSource(): Flow<PagingData<Movie>>
+
+    fun getTopRatedMoviePagingSource(): Flow<PagingData<Movie>>
+
     suspend fun getPopularMovie(): Response<Movies>
 
     suspend fun getUpcomingMovie(): Response<Movies>

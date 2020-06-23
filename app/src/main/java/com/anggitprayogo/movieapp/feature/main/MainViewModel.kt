@@ -2,6 +2,8 @@ package com.anggitprayogo.movieapp.feature.main
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
 import com.anggitprayogo.core.base.BaseViewModel
 import com.anggitprayogo.core.util.state.LoaderState
 import com.anggitprayogo.core.util.state.ResultState
@@ -10,6 +12,7 @@ import com.anggitprayogo.movieapp.data.remote.entity.Movie
 import com.anggitprayogo.movieapp.data.enum.MovieFilter
 import com.anggitprayogo.movieapp.domain.MovieUseCase
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -19,6 +22,7 @@ import javax.inject.Inject
  */
 interface MainViewModelContract {
     fun getMovies(movieFilter: MovieFilter)
+    fun getMoviesPaginSource(movieFilter: MovieFilter): Flow<PagingData<Movie>>
 }
 
 class MainViewModel @Inject constructor(
@@ -41,6 +45,12 @@ class MainViewModel @Inject constructor(
         get() = _resultMovies
 
     /**
+     * Paging Source
+     */
+    private var currentQueryValue: String? = null
+    private var currentSearchResult: Flow<PagingData<Movie>>? = null
+
+    /**
      * Error
      */
     private val _error = MutableLiveData<String>()
@@ -55,8 +65,16 @@ class MainViewModel @Inject constructor(
     val networkError: LiveData<Boolean>
         get() = _networkError
 
-    init {
-        getMovies(MovieFilter.POPULAR)
+//    init {
+//        getMovies(MovieFilter.POPULAR)
+//    }
+
+    override fun getMoviesPaginSource(movieFilter: MovieFilter) : Flow<PagingData<Movie>>{
+        val lastResult = currentSearchResult
+        if (lastResult != null) return lastResult
+        val newResult = useCase.getMoviesByTypePageSource(movieFilter).cachedIn(this)
+        currentSearchResult = newResult
+        return newResult
     }
 
     override fun getMovies(movieFilter: MovieFilter) {

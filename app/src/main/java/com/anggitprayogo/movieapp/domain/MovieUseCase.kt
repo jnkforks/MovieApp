@@ -1,13 +1,16 @@
 package com.anggitprayogo.movieapp.domain
 
+import androidx.paging.PagingData
 import com.anggitprayogo.core.util.ext.safeApiCall
 import com.anggitprayogo.core.util.state.ResultState
 import com.anggitprayogo.movieapp.data.enum.MovieFilter
 import com.anggitprayogo.movieapp.data.local.entity.MovieEntity
+import com.anggitprayogo.movieapp.data.remote.entity.Movie
 import com.anggitprayogo.movieapp.data.remote.entity.MovieDetail
 import com.anggitprayogo.movieapp.data.remote.entity.MovieReviews
 import com.anggitprayogo.movieapp.data.remote.entity.Movies
 import com.anggitprayogo.movieapp.data.repository.MovieRepository
+import kotlinx.coroutines.flow.Flow
 import retrofit2.Response
 import javax.inject.Inject
 
@@ -20,6 +23,19 @@ class MovieUseCase @Inject constructor(
     /**
      * Remote
      */
+    fun getMoviesByTypePageSource(movieFilter: MovieFilter): Flow<PagingData<Movie>> {
+        return fetchMovieByTypePagingSource(movieFilter)
+    }
+
+    private fun fetchMovieByTypePagingSource(movieFilter: MovieFilter): Flow<PagingData<Movie>> {
+        return when (movieFilter) {
+            MovieFilter.POPULAR -> movieRepository.getPopularMoviePagingSource()
+            MovieFilter.NOW_PLAYING -> movieRepository.getNowPlayingMoviePagingSource()
+            MovieFilter.UP_COMING -> movieRepository.getUpcomingMoviePagingSource()
+            MovieFilter.TOP_RATED -> movieRepository.getTopRatedMoviePagingSource()
+        }
+    }
+
     suspend fun getMoviesByType(movieFilter: MovieFilter): ResultState<Movies> {
         return safeApiCall {
             val response = fetchMovieByType(movieFilter)

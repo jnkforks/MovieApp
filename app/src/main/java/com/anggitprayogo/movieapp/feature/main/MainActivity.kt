@@ -5,6 +5,8 @@ import android.os.Bundle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.lifecycleScope
+import androidx.paging.ExperimentalPagingApi
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.anggitprayogo.core.base.BaseActivity
 import com.anggitprayogo.core.util.ext.setGone
@@ -12,12 +14,18 @@ import com.anggitprayogo.core.util.ext.setVisible
 import com.anggitprayogo.core.util.state.LoaderState
 import com.anggitprayogo.movieapp.BaseApplication
 import com.anggitprayogo.movieapp.R
-import com.anggitprayogo.movieapp.data.remote.entity.Movie
 import com.anggitprayogo.movieapp.data.enum.MovieFilter
+import com.anggitprayogo.movieapp.data.remote.entity.Movie
 import com.anggitprayogo.movieapp.feature.favouritelist.FavouriteListActivity
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@ExperimentalCoroutinesApi
 class MainActivity : BaseActivity(), FilterBottomSheetDialogFragment.ItemClickListener {
 
     @Inject
@@ -28,8 +36,14 @@ class MainActivity : BaseActivity(), FilterBottomSheetDialogFragment.ItemClickLi
 
     private var currentFilter = MovieFilter.POPULAR
 
+    private var job: Job? = null
+
     private val mainAdapter: MainAdapter by lazy {
         MainAdapter()
+    }
+
+    private val adapter: MainPagingAdapter by lazy {
+        MainPagingAdapter()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,11 +54,30 @@ class MainActivity : BaseActivity(), FilterBottomSheetDialogFragment.ItemClickLi
         initRecyclerview()
         initObserver()
         initListener()
+        initFetchData()
+    }
+
+    private fun fetchData() {
+        job?.cancel()
+        job = lifecycleScope.launch {
+            viewModel.getMoviesPaginSource(currentFilter).collectLatest {
+                adapter.submitData(it)
+            }
+        }
+    }
+
+    @OptIn(ExperimentalPagingApi::class)
+    private fun initFetchData() {
+        lifecycleScope.launch {
+            adapter.dataRefreshFlow.collect {
+                rvMovie.scrollToPosition(0)
+            }
+        }
     }
 
     private fun initListener() {
         swipeRefreshLayout.setOnRefreshListener {
-            viewModel.getMovies(currentFilter)
+            fetchData()
             swipeRefreshLayout.isRefreshing = false
         }
 
@@ -109,8 +142,8 @@ class MainActivity : BaseActivity(), FilterBottomSheetDialogFragment.ItemClickLi
 
     private fun initRecyclerview() {
         rvMovie.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        rvMovie.adapter = mainAdapter
-        mainAdapter.setActivity(this)
+        rvMovie.adapter = adapter
+        adapter.setActivity(this)
     }
 
     private fun initViewModel() {
