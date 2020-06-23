@@ -16,6 +16,7 @@ Movie DB App uses a number of open source projects and propose architecture to w
 * Unit Test - Make your code safer
 * Motion Layout - Easier to animate your layout
 * AppInitializer - a straightforward, performant way to initialize components at application startup.
+* Paging -  Load and display small chunks of data at a time
 * And More..
 
 And of course Movie Db App itself is open source with a public repo

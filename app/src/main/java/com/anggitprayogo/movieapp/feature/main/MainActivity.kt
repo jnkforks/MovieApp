@@ -2,11 +2,13 @@ package com.anggitprayogo.movieapp.feature.main
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.ExperimentalPagingApi
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.anggitprayogo.core.base.BaseActivity
 import com.anggitprayogo.core.util.ext.setGone
@@ -17,6 +19,7 @@ import com.anggitprayogo.movieapp.R
 import com.anggitprayogo.movieapp.data.enum.MovieFilter
 import com.anggitprayogo.movieapp.feature.favouritelist.FavouriteListActivity
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.base_error_internet_connection.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collect
@@ -82,6 +85,8 @@ class MainActivity : BaseActivity(), FilterBottomSheetDialogFragment.ItemClickLi
         ivFavourite.setOnClickListener {
             startActivity(Intent(this, FavouriteListActivity::class.java))
         }
+
+        btnRetryLoad.setOnClickListener { adapter.retry() }
     }
 
     private fun initObserver() {
@@ -129,6 +134,24 @@ class MainActivity : BaseActivity(), FilterBottomSheetDialogFragment.ItemClickLi
             footer = MovieLoadStateAdapter { adapter.retry() }
         )
         adapter.setActivity(this)
+        adapter.addLoadStateListener { loadState ->
+            rvMovie.isVisible = loadState.refresh is LoadState.NotLoading
+            viewLoading.isVisible = loadState.refresh is LoadState.Loading
+            viewErrorConnection.isVisible = loadState.refresh is LoadState.Error
+
+//            val errorState = loadState.source.append as? LoadState.Error
+//                ?: loadState.source.prepend as? LoadState.Error
+//                ?: loadState.append as? LoadState.Error
+//                ?: loadState.prepend as? LoadState.Error
+
+//            errorState?.let {
+//                Toast.makeText(
+//                    this,
+//                    "\uD83D\uDE28 Wooops ${it.error}",
+//                    Toast.LENGTH_LONG
+//                ).show()
+//            }
+        }
     }
 
     private fun initViewModel() {

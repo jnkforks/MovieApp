@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorWhite"
     android:padding="@dimen/dimen_16"
-    android:visibility="gone">
+    android:visibility="visible">
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/lottieNoInternetConnection"
@@ -45,5 +45,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvNoInternetHeader" />
+
+    <Button
+        android:id="@+id/btnRetryLoad"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/retry"
+        android:layout_marginTop="@dimen/dimen_10"
+        app:layout_constraintTop_toBottomOf="@id/tvNoInternetBody"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
