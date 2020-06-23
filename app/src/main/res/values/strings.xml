@@ -21,4 +21,6 @@
     <string name="reviews_header">Reviews</string>
     <string name="message_empty_reviews_header">No Reviews</string>
     <string name="message_empty_reviews_body">Oops, there is no reviews</string>
+    <string name="message_error_footer_movie">Oops, there is problem next data</string>
+    <string name="retry">Retry</string>
 </resources>

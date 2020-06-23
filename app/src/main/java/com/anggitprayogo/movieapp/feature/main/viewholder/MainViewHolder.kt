@@ -12,10 +12,12 @@ import com.anggitprayogo.movieapp.data.remote.entity.Movie
 import com.anggitprayogo.movieapp.feature.detail.MovieDetailActivity
 import com.anggitprayogo.movieapp.feature.main.MainActivity
 import kotlinx.android.synthetic.main.row_item_movie.view.*
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 /**
  * Created by Anggit Prayogo on 6/23/20.
  */
+@ExperimentalCoroutinesApi
 class MainViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
     companion object {
