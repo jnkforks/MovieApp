@@ -67,6 +67,7 @@ dependencies {
     implementation Jetpack.lifecycle
     kapt Jetpack.lifecycleCompiler
     implementation Jetpack.appInitializer
+    implementation Jetpack.paging
 
     //Shimmer
     implementation Shimmer.shimmer

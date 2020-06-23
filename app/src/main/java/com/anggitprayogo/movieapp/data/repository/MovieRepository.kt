@@ -1,9 +1,9 @@
 package com.anggitprayogo.movieapp.data.repository
 
-import com.anggitprayogo.movieapp.data.db.entity.MovieEntity
-import com.anggitprayogo.movieapp.data.entity.MovieDetail
-import com.anggitprayogo.movieapp.data.entity.MovieReviews
-import com.anggitprayogo.movieapp.data.entity.Movies
+import com.anggitprayogo.movieapp.data.local.entity.MovieEntity
+import com.anggitprayogo.movieapp.data.remote.entity.MovieDetail
+import com.anggitprayogo.movieapp.data.remote.entity.MovieReviews
+import com.anggitprayogo.movieapp.data.remote.entity.Movies
 import retrofit2.Response
 
 /**

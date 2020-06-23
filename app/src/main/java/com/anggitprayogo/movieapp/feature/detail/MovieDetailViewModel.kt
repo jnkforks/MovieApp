@@ -6,9 +6,9 @@ import com.anggitprayogo.core.base.BaseViewModel
 import com.anggitprayogo.core.util.state.LoaderState
 import com.anggitprayogo.core.util.state.ResultState
 import com.anggitprayogo.core.util.thread.SchedulerProvider
-import com.anggitprayogo.movieapp.data.db.entity.MovieEntity
-import com.anggitprayogo.movieapp.data.entity.MovieDetail
-import com.anggitprayogo.movieapp.data.entity.MovieReviews
+import com.anggitprayogo.movieapp.data.local.entity.MovieEntity
+import com.anggitprayogo.movieapp.data.remote.entity.MovieDetail
+import com.anggitprayogo.movieapp.data.remote.entity.MovieReviews
 import com.anggitprayogo.movieapp.domain.MovieUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

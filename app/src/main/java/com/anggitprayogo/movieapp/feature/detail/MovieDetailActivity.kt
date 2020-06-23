@@ -15,10 +15,10 @@ import com.anggitprayogo.core.util.ext.setVisible
 import com.anggitprayogo.core.util.ext.toast
 import com.anggitprayogo.movieapp.BaseApplication
 import com.anggitprayogo.movieapp.R
-import com.anggitprayogo.movieapp.data.db.entity.MovieEntity
-import com.anggitprayogo.movieapp.data.entity.MovieDetail
-import com.anggitprayogo.movieapp.data.entity.MovieReviews
-import com.anggitprayogo.movieapp.data.entity.Review
+import com.anggitprayogo.movieapp.data.local.entity.MovieEntity
+import com.anggitprayogo.movieapp.data.remote.entity.MovieDetail
+import com.anggitprayogo.movieapp.data.remote.entity.MovieReviews
+import com.anggitprayogo.movieapp.data.remote.entity.Review
 import com.google.android.material.appbar.AppBarLayout
 import kotlinx.android.synthetic.main.activity_movie_detail.*
 import javax.inject.Inject

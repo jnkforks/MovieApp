@@ -5,7 +5,7 @@ import androidx.lifecycle.Observer
 import com.anggitprayogo.core.util.state.ResultState
 import com.anggitprayogo.core.util.thread.TestSchedulerProvider
 import com.anggitprayogo.movieapp.TestDataSourceMovies
-import com.anggitprayogo.movieapp.data.entity.Movie
+import com.anggitprayogo.movieapp.data.remote.entity.Movie
 import com.anggitprayogo.movieapp.domain.MovieUseCase
 import com.anggitprayogo.movieapp.getResponseErrorValue
 import kotlinx.coroutines.Dispatchers
@@ -76,7 +76,7 @@ class MainViewModelTest {
     }
 
     private fun observeMovies() {
-        SUT.resultPopularMovie.observeForever(popularMovies)
+        SUT.resultMovies.observeForever(popularMovies)
         SUT.resultUpcomingMovie.observeForever(upcomingMovies)
         SUT.resultTopRatedMovie.observeForever(topRatedMovies)
         SUT.resultNowPlaying.observeForever(nowPlayingMovies)

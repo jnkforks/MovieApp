@@ -1,10 +1,10 @@
-package com.anggitprayogo.movieapp.data.db.dao
+package com.anggitprayogo.movieapp.data.local.dao
 
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
-import com.anggitprayogo.movieapp.data.db.entity.MovieEntity
+import com.anggitprayogo.movieapp.data.local.entity.MovieEntity
 
 /**
  * Created by Anggit Prayogo on 6/21/20.

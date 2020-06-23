@@ -1,4 +1,4 @@
-package com.anggitprayogo.movieapp.data.entity
+package com.anggitprayogo.movieapp.data.remote.entity
 
 import com.google.gson.annotations.SerializedName
 

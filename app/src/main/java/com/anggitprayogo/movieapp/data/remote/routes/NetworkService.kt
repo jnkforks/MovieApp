@@ -1,8 +1,8 @@
-package com.anggitprayogo.movieapp.data.routes
+package com.anggitprayogo.movieapp.data.remote.routes
 
-import com.anggitprayogo.movieapp.data.entity.MovieDetail
-import com.anggitprayogo.movieapp.data.entity.MovieReviews
-import com.anggitprayogo.movieapp.data.entity.Movies
+import com.anggitprayogo.movieapp.data.remote.entity.MovieDetail
+import com.anggitprayogo.movieapp.data.remote.entity.MovieReviews
+import com.anggitprayogo.movieapp.data.remote.entity.Movies
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path

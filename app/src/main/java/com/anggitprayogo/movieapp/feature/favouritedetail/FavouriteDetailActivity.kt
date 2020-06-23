@@ -11,7 +11,7 @@ import com.anggitprayogo.core.util.ext.load
 import com.anggitprayogo.core.util.ext.toast
 import com.anggitprayogo.movieapp.BaseApplication
 import com.anggitprayogo.movieapp.R
-import com.anggitprayogo.movieapp.data.db.entity.MovieEntity
+import com.anggitprayogo.movieapp.data.local.entity.MovieEntity
 import com.google.android.material.appbar.AppBarLayout
 import kotlinx.android.synthetic.main.activity_favourite_detail.appBarLayout
 import kotlinx.android.synthetic.main.activity_favourite_detail.fabFavourite
@@ -22,7 +22,6 @@ import kotlinx.android.synthetic.main.activity_favourite_detail.tvImdbRating
 import kotlinx.android.synthetic.main.activity_favourite_detail.tvMovieMetaData
 import kotlinx.android.synthetic.main.activity_favourite_detail.tvMovieTitle
 import kotlinx.android.synthetic.main.activity_favourite_detail.tvOverview
-import kotlinx.android.synthetic.main.activity_movie_detail.*
 import javax.inject.Inject
 
 class FavouriteDetailActivity : BaseActivity() {

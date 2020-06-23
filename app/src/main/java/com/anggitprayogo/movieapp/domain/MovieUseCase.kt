@@ -2,11 +2,13 @@ package com.anggitprayogo.movieapp.domain
 
 import com.anggitprayogo.core.util.ext.safeApiCall
 import com.anggitprayogo.core.util.state.ResultState
-import com.anggitprayogo.movieapp.data.db.entity.MovieEntity
-import com.anggitprayogo.movieapp.data.entity.MovieDetail
-import com.anggitprayogo.movieapp.data.entity.MovieReviews
-import com.anggitprayogo.movieapp.data.entity.Movies
+import com.anggitprayogo.movieapp.data.enum.MovieFilter
+import com.anggitprayogo.movieapp.data.local.entity.MovieEntity
+import com.anggitprayogo.movieapp.data.remote.entity.MovieDetail
+import com.anggitprayogo.movieapp.data.remote.entity.MovieReviews
+import com.anggitprayogo.movieapp.data.remote.entity.Movies
 import com.anggitprayogo.movieapp.data.repository.MovieRepository
+import retrofit2.Response
 import javax.inject.Inject
 
 /**
@@ -18,9 +20,9 @@ class MovieUseCase @Inject constructor(
     /**
      * Remote
      */
-    suspend fun getPopularMovie(): ResultState<Movies> {
+    suspend fun getMoviesByType(movieFilter: MovieFilter): ResultState<Movies> {
         return safeApiCall {
-            val response = movieRepository.getPopularMovie()
+            val response = fetchMovieByType(movieFilter)
             try {
                 ResultState.Success(response.body()!!)
             } catch (e: Exception) {
@@ -29,36 +31,12 @@ class MovieUseCase @Inject constructor(
         }
     }
 
-    suspend fun getUpcomingMovie(): ResultState<Movies> {
-        return safeApiCall {
-            val response = movieRepository.getUpcomingMovie()
-            try {
-                ResultState.Success(response.body()!!)
-            } catch (e: Exception) {
-                ResultState.Error(e.localizedMessage, response.code())
-            }
-        }
-    }
-
-    suspend fun getNowPlayingMovie(): ResultState<Movies> {
-        return safeApiCall {
-            val response = movieRepository.getNowPlayingMovie()
-            try {
-                ResultState.Success(response.body()!!)
-            } catch (e: Exception) {
-                ResultState.Error(e.localizedMessage, response.code())
-            }
-        }
-    }
-
-    suspend fun getTopRatedMovie(): ResultState<Movies> {
-        return safeApiCall {
-            val response = movieRepository.getTopRated()
-            try {
-                ResultState.Success(response.body()!!)
-            } catch (e: Exception) {
-                ResultState.Error(e.localizedMessage, response.code())
-            }
+    private suspend fun fetchMovieByType(movieFilter: MovieFilter): Response<Movies> {
+        return when (movieFilter) {
+            MovieFilter.POPULAR -> movieRepository.getPopularMovie()
+            MovieFilter.NOW_PLAYING -> movieRepository.getNowPlayingMovie()
+            MovieFilter.UP_COMING -> movieRepository.getUpcomingMovie()
+            MovieFilter.TOP_RATED -> movieRepository.getTopRated()
         }
     }
 

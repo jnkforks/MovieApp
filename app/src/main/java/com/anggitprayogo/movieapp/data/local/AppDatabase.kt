@@ -1,9 +1,9 @@
-package com.anggitprayogo.movieapp.data.db
+package com.anggitprayogo.movieapp.data.local
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.anggitprayogo.movieapp.data.db.dao.MovieDao
-import com.anggitprayogo.movieapp.data.db.entity.MovieEntity
+import com.anggitprayogo.movieapp.data.local.dao.MovieDao
+import com.anggitprayogo.movieapp.data.local.entity.MovieEntity
 
 /**
  * Created by Anggit Prayogo on 6/21/20.

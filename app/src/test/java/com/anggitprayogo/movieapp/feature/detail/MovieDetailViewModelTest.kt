@@ -5,9 +5,9 @@ import androidx.lifecycle.Observer
 import com.anggitprayogo.core.util.state.ResultState
 import com.anggitprayogo.core.util.thread.TestSchedulerProvider
 import com.anggitprayogo.movieapp.TestDataSourceMovies
-import com.anggitprayogo.movieapp.data.db.entity.MovieEntity
-import com.anggitprayogo.movieapp.data.entity.MovieDetail
-import com.anggitprayogo.movieapp.data.entity.MovieReviews
+import com.anggitprayogo.movieapp.data.local.entity.MovieEntity
+import com.anggitprayogo.movieapp.data.remote.entity.MovieDetail
+import com.anggitprayogo.movieapp.data.remote.entity.MovieReviews
 import com.anggitprayogo.movieapp.domain.MovieUseCase
 import com.anggitprayogo.movieapp.getResponseErrorValue
 import kotlinx.coroutines.Dispatchers

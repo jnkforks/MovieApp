@@ -1,6 +1,6 @@
 package com.anggitprayogo.movieapp.di.module
 
-import com.anggitprayogo.movieapp.data.routes.NetworkService
+import com.anggitprayogo.movieapp.data.remote.routes.NetworkService
 import com.anggitprayogo.movieapp.di.DataScope
 import com.anggitprayogo.movieapp.network.Network
 import dagger.Module

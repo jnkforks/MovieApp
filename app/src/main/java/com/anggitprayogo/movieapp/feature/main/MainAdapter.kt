@@ -8,7 +8,7 @@ import androidx.core.app.ActivityOptionsCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.anggitprayogo.core.util.ext.load
 import com.anggitprayogo.movieapp.R
-import com.anggitprayogo.movieapp.data.entity.Movie
+import com.anggitprayogo.movieapp.data.remote.entity.Movie
 import com.anggitprayogo.movieapp.feature.detail.MovieDetailActivity
 import kotlinx.android.synthetic.main.row_item_movie.view.*
 

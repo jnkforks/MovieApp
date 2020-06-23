@@ -1,4 +1,4 @@
-package com.anggitprayogo.movieapp.data.db.entity
+package com.anggitprayogo.movieapp.data.local.entity
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

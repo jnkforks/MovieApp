@@ -1,11 +1,11 @@
 package com.anggitprayogo.movieapp.data.repository
 
-import com.anggitprayogo.movieapp.data.db.dao.MovieDao
-import com.anggitprayogo.movieapp.data.db.entity.MovieEntity
-import com.anggitprayogo.movieapp.data.entity.MovieDetail
-import com.anggitprayogo.movieapp.data.entity.MovieReviews
-import com.anggitprayogo.movieapp.data.entity.Movies
-import com.anggitprayogo.movieapp.data.routes.NetworkService
+import com.anggitprayogo.movieapp.data.local.dao.MovieDao
+import com.anggitprayogo.movieapp.data.local.entity.MovieEntity
+import com.anggitprayogo.movieapp.data.remote.entity.MovieDetail
+import com.anggitprayogo.movieapp.data.remote.entity.MovieReviews
+import com.anggitprayogo.movieapp.data.remote.entity.Movies
+import com.anggitprayogo.movieapp.data.remote.routes.NetworkService
 import retrofit2.Response
 import javax.inject.Inject
 

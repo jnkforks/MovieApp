@@ -11,7 +11,7 @@ import com.anggitprayogo.core.util.ext.setVisible
 import com.anggitprayogo.core.util.ext.toast
 import com.anggitprayogo.movieapp.BaseApplication
 import com.anggitprayogo.movieapp.R
-import com.anggitprayogo.movieapp.data.db.entity.MovieEntity
+import com.anggitprayogo.movieapp.data.local.entity.MovieEntity
 import kotlinx.android.synthetic.main.activity_favourite_list.*
 import javax.inject.Inject
 

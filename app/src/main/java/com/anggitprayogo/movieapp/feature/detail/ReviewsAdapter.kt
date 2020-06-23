@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.anggitprayogo.movieapp.R
-import com.anggitprayogo.movieapp.data.entity.Review
+import com.anggitprayogo.movieapp.data.remote.entity.Review
 import kotlinx.android.synthetic.main.row_item_review.view.*
 
 /**

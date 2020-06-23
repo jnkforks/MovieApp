@@ -12,7 +12,7 @@ import com.anggitprayogo.core.util.ext.setVisible
 import com.anggitprayogo.core.util.state.LoaderState
 import com.anggitprayogo.movieapp.BaseApplication
 import com.anggitprayogo.movieapp.R
-import com.anggitprayogo.movieapp.data.entity.Movie
+import com.anggitprayogo.movieapp.data.remote.entity.Movie
 import com.anggitprayogo.movieapp.data.enum.MovieFilter
 import com.anggitprayogo.movieapp.feature.favouritelist.FavouriteListActivity
 import kotlinx.android.synthetic.main.activity_main.*
@@ -44,7 +44,7 @@ class MainActivity : BaseActivity(), FilterBottomSheetDialogFragment.ItemClickLi
 
     private fun initListener() {
         swipeRefreshLayout.setOnRefreshListener {
-            viewModel.getMovie(currentFilter)
+            viewModel.getMovies(currentFilter)
             swipeRefreshLayout.isRefreshing = false
         }
 
@@ -64,25 +64,7 @@ class MainActivity : BaseActivity(), FilterBottomSheetDialogFragment.ItemClickLi
             }
         })
 
-        viewModel.resultPopularMovie.observe(this, Observer {
-            it?.let {
-                handleStatePopularMovie(it)
-            }
-        })
-
-        viewModel.resultNowPlaying.observe(this, Observer {
-            it?.let {
-                handleStatePopularMovie(it)
-            }
-        })
-
-        viewModel.resultTopRatedMovie.observe(this, Observer {
-            it?.let {
-                handleStatePopularMovie(it)
-            }
-        })
-
-        viewModel.resultUpcomingMovie.observe(this, Observer {
+        viewModel.resultMovies.observe(this, Observer {
             it?.let {
                 handleStatePopularMovie(it)
             }
@@ -147,7 +129,7 @@ class MainActivity : BaseActivity(), FilterBottomSheetDialogFragment.ItemClickLi
     override fun onItemClick(item: MovieFilter?) {
         val filterSelected = item ?: MovieFilter.POPULAR
         currentFilter = filterSelected
-        viewModel.getMovie(filterSelected)
+        viewModel.getMovies(filterSelected)
         changeAppTitleByFilter(filterSelected)
     }
 

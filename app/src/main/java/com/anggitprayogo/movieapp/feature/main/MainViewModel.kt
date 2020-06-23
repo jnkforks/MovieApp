@@ -6,7 +6,7 @@ import com.anggitprayogo.core.base.BaseViewModel
 import com.anggitprayogo.core.util.state.LoaderState
 import com.anggitprayogo.core.util.state.ResultState
 import com.anggitprayogo.core.util.thread.SchedulerProvider
-import com.anggitprayogo.movieapp.data.entity.Movie
+import com.anggitprayogo.movieapp.data.remote.entity.Movie
 import com.anggitprayogo.movieapp.data.enum.MovieFilter
 import com.anggitprayogo.movieapp.domain.MovieUseCase
 import kotlinx.coroutines.Dispatchers
@@ -18,11 +18,7 @@ import javax.inject.Inject
  * Created by Anggit Prayogo on 6/21/20.
  */
 interface MainViewModelContract {
-    fun getPopularMovie()
-    fun getTopRatedMovie()
-    fun getPlayingNowMovie()
-    fun getUpcomingMovie()
-    fun getMovie(movieFilter: MovieFilter)
+    fun getMovies(movieFilter: MovieFilter)
 }
 
 class MainViewModel @Inject constructor(
@@ -40,31 +36,9 @@ class MainViewModel @Inject constructor(
     /**
      * Popular Movie State
      */
-    private val _resultPopularMovie = MutableLiveData<List<Movie>>()
-    val resultPopularMovie: LiveData<List<Movie>>
-        get() = _resultPopularMovie
-
-    /**
-     * Top Rated Movie State
-     */
-    private val _resultTopRatedMovie = MutableLiveData<List<Movie>>()
-    val resultTopRatedMovie: LiveData<List<Movie>>
-        get() = _resultTopRatedMovie
-
-    /**
-     * Upcoming Movie State
-     */
-    private val _resultUpcomingMovie = MutableLiveData<List<Movie>>()
-    val resultUpcomingMovie: LiveData<List<Movie>>
-        get() = _resultUpcomingMovie
-
-    /**
-     * Now Playing Movie State
-     */
-    private val _resultNowPlaying = MutableLiveData<List<Movie>>()
-    val resultNowPlaying: LiveData<List<Movie>>
-        get() = _resultNowPlaying
-
+    private val _resultMovies = MutableLiveData<List<Movie>>()
+    val resultMovies: LiveData<List<Movie>>
+        get() = _resultMovies
 
     /**
      * Error
@@ -82,90 +56,18 @@ class MainViewModel @Inject constructor(
         get() = _networkError
 
     init {
-        getPopularMovie()
+        getMovies(MovieFilter.POPULAR)
     }
 
-    override fun getMovie(movieFilter: MovieFilter) {
-        when (movieFilter) {
-            MovieFilter.POPULAR -> getPopularMovie()
-            MovieFilter.NOW_PLAYING -> getPlayingNowMovie()
-            MovieFilter.UP_COMING -> getUpcomingMovie()
-            MovieFilter.TOP_RATED -> getTopRatedMovie()
-        }
-    }
-
-    override fun getPopularMovie() {
+    override fun getMovies(movieFilter: MovieFilter) {
         _state.value = LoaderState.ShowLoading
         launch {
-            val result = useCase.getPopularMovie()
+            val result = useCase.getMoviesByType(movieFilter)
             withContext(Dispatchers.Main) {
                 _state.value = LoaderState.HideLoading
                 when (result) {
                     is ResultState.Success -> {
-                        _resultPopularMovie.postValue(result.data.results)
-                    }
-                    is ResultState.Error -> {
-                        _error.postValue(result.error)
-                    }
-                    is ResultState.NetworkError -> {
-                        _networkError.postValue(true)
-                    }
-                }
-            }
-        }
-    }
-
-    override fun getTopRatedMovie() {
-        _state.value = LoaderState.ShowLoading
-        launch {
-            val result = useCase.getTopRatedMovie()
-            withContext(Dispatchers.Main) {
-                _state.value = LoaderState.HideLoading
-                when (result) {
-                    is ResultState.Success -> {
-                        _resultTopRatedMovie.postValue(result.data.results)
-                    }
-                    is ResultState.Error -> {
-                        _error.postValue(result.error)
-                    }
-                    is ResultState.NetworkError -> {
-                        _networkError.postValue(true)
-                    }
-                }
-            }
-        }
-    }
-
-    override fun getPlayingNowMovie() {
-        _state.value = LoaderState.ShowLoading
-        launch {
-            val result = useCase.getNowPlayingMovie()
-            withContext(Dispatchers.Main) {
-                _state.value = LoaderState.HideLoading
-                when (result) {
-                    is ResultState.Success -> {
-                        _resultNowPlaying.postValue(result.data.results)
-                    }
-                    is ResultState.Error -> {
-                        _error.postValue(result.error)
-                    }
-                    is ResultState.NetworkError -> {
-                        _networkError.postValue(true)
-                    }
-                }
-            }
-        }
-    }
-
-    override fun getUpcomingMovie() {
-        _state.value = LoaderState.ShowLoading
-        launch {
-            val result = useCase.getUpcomingMovie()
-            withContext(Dispatchers.Main) {
-                _state.value = LoaderState.HideLoading
-                when (result) {
-                    is ResultState.Success -> {
-                        _resultUpcomingMovie.postValue(result.data.results)
+                        _resultMovies.postValue(result.data.results)
                     }
                     is ResultState.Error -> {
                         _error.postValue(result.error)

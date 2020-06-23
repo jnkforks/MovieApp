@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.anggitprayogo.core.base.BaseViewModel
 import com.anggitprayogo.core.util.state.ResultState
 import com.anggitprayogo.core.util.thread.SchedulerProvider
-import com.anggitprayogo.movieapp.data.db.entity.MovieEntity
+import com.anggitprayogo.movieapp.data.local.entity.MovieEntity
 import com.anggitprayogo.movieapp.domain.MovieUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

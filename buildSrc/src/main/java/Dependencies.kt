@@ -46,6 +46,7 @@ object Version {
      */
     const val archLifecycle = "2.0.0"
     const val appInitializer = "1.0.0-alpha01"
+    const val paging = "3.0.0-alpha01"
 
     /**
      * Retrofit Network version
@@ -111,6 +112,7 @@ object Jetpack {
     const val lifecycle = "androidx.lifecycle:lifecycle-extensions:${Version.archLifecycle}"
     const val lifecycleCompiler = "androidx.lifecycle:lifecycle-compiler:${Version.archLifecycle}"
     const val appInitializer = "androidx.startup:startup-runtime:${Version.appInitializer}"
+    const val paging = "androidx.paging:paging-runtime:${Version.paging}"
 }
 
 object Coroutines {

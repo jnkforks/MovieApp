@@ -2,8 +2,8 @@ package com.anggitprayogo.movieapp.di.module
 
 import android.content.Context
 import androidx.room.Room
-import com.anggitprayogo.movieapp.data.db.AppDatabase
-import com.anggitprayogo.movieapp.data.db.dao.MovieDao
+import com.anggitprayogo.movieapp.data.local.AppDatabase
+import com.anggitprayogo.movieapp.data.local.dao.MovieDao
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton

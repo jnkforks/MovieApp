@@ -1,7 +1,7 @@
 package com.anggitprayogo.movieapp
 
-import com.anggitprayogo.movieapp.data.db.entity.MovieEntity
-import com.anggitprayogo.movieapp.data.entity.*
+import com.anggitprayogo.movieapp.data.local.entity.MovieEntity
+import com.anggitprayogo.movieapp.data.remote.entity.*
 import org.mockito.Mockito.mock
 
 /**
