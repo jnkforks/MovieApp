@@ -10,7 +10,7 @@ import com.anggitprayogo.movieapp.BuildConfig
  */
 @Entity(tableName = "movies")
 data class MovieEntity(
-    @PrimaryKey @ColumnInfo(name = "movie_id") val movieId: Long?,
+    @PrimaryKey @ColumnInfo(name = "id") val movieId: Long?,
     @ColumnInfo(name = "title") val title: String?,
     @ColumnInfo(name = "genres") val genres: String?,
     @ColumnInfo(name = "vote_count") val voteCount: Int?,
