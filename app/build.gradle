@@ -45,6 +45,7 @@ dependencies {
 
     implementation project(Modules.core)
     implementation project(Modules.network)
+    implementation project(Modules.data)
 
     //Android Support
     implementation AndroidSupport.coreKtx

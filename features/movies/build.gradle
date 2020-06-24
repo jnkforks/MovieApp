@@ -18,4 +18,8 @@ dependencies{
     /*Coroutine*/
     implementation Coroutines.core
     implementation Coroutines.android
+
+    //features module
+    implementation project(Modules.core)
+    implementation project(Modules.data)
 }

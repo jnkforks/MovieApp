@@ -1,7 +1,9 @@
 package com.anggitprayogo.movieapp.di
 
 import android.content.Context
-import com.anggitprayogo.movieapp.di.module.*
+import com.anggitprayogo.movieapp.di.module.AppModule
+import com.anggitprayogo.movieapp.di.module.RoomModule
+import com.anggitprayogo.movieapp.di.module.ViewModelModule
 import com.anggitprayogo.movieapp.feature.detail.MovieDetailActivity
 import com.anggitprayogo.movieapp.feature.favouritedetail.FavouriteDetailActivity
 import com.anggitprayogo.movieapp.feature.favouritelist.FavouriteListActivity
@@ -9,6 +11,7 @@ import com.anggitprayogo.movieapp.feature.main.MainActivity
 import com.anggitprayogo.movieapp.feature.splash.SplashScreenActivity
 import dagger.BindsInstance
 import dagger.Component
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import javax.inject.Singleton
 
 /**
@@ -17,7 +20,6 @@ import javax.inject.Singleton
 @Singleton
 @Component(
     modules = [
-        DataModule::class,
         ViewModelModule::class,
         AppModule::class,
         RoomModule::class
@@ -30,6 +32,7 @@ interface AppComponent {
         fun create(@BindsInstance context: Context): AppComponent
     }
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     fun inject(activity: MainActivity)
     fun inject(activity: MovieDetailActivity)
     fun inject(activity: FavouriteListActivity)
