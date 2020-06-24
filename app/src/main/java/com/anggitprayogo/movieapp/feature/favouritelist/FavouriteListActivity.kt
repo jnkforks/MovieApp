@@ -11,7 +11,7 @@ import com.anggitprayogo.core.util.ext.setVisible
 import com.anggitprayogo.core.util.ext.toast
 import com.anggitprayogo.movieapp.BaseApplication
 import com.anggitprayogo.movieapp.R
-import com.anggitprayogo.movieapp.data.local.entity.MovieEntity
+import com.anggitprayogo.movieapp.data.local.entity.FavouriteEntity
 import kotlinx.android.synthetic.main.activity_favourite_list.*
 import javax.inject.Inject
 
@@ -21,7 +21,7 @@ class FavouriteListActivity : BaseActivity() {
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private lateinit var viewModel: FavouriteListViewModel
 
-    private val movieList = mutableListOf<MovieEntity>()
+    private val movieList = mutableListOf<FavouriteEntity>()
 
     private val adapter: FavouriteListAdapter by lazy {
         FavouriteListAdapter()
@@ -66,15 +66,15 @@ class FavouriteListActivity : BaseActivity() {
         })
     }
 
-    private fun handleStateResultMovies(movies: List<MovieEntity>) {
-        handleEmptyViewVisibility(movies)
+    private fun handleStateResultMovies(favourites: List<FavouriteEntity>) {
+        handleEmptyViewVisibility(favourites)
         movieList.clear()
-        movieList.addAll(movies)
+        movieList.addAll(favourites)
         adapter.setItems(movieList)
     }
 
-    private fun handleEmptyViewVisibility(movies: List<MovieEntity>) {
-        if (movies.isEmpty()) {
+    private fun handleEmptyViewVisibility(favourites: List<FavouriteEntity>) {
+        if (favourites.isEmpty()) {
             rvMovie.setGone()
             viewEmpty.setVisible()
         }else{

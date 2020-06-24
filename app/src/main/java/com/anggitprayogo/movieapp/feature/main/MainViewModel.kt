@@ -8,6 +8,7 @@ import com.anggitprayogo.core.base.BaseViewModel
 import com.anggitprayogo.core.util.state.LoaderState
 import com.anggitprayogo.core.util.thread.SchedulerProvider
 import com.anggitprayogo.movieapp.data.enum.MovieFilter
+import com.anggitprayogo.movieapp.data.local.entity.MovieEntity
 import com.anggitprayogo.movieapp.data.remote.entity.Movie
 import com.anggitprayogo.movieapp.domain.MovieUseCase
 import kotlinx.coroutines.flow.Flow
@@ -17,7 +18,7 @@ import javax.inject.Inject
  * Created by Anggit Prayogo on 6/21/20.
  */
 interface MainViewModelContract {
-    fun getMovies(movieFilter: MovieFilter): Flow<PagingData<Movie>>
+    fun getMovies(movieFilter: MovieFilter): Flow<PagingData<MovieEntity>>
 }
 
 class MainViewModel @Inject constructor(
@@ -42,7 +43,7 @@ class MainViewModel @Inject constructor(
     /**
      * Paging Source
      */
-    private var currentSearchResult: Flow<PagingData<Movie>>? = null
+    private var currentSearchResult: Flow<PagingData<MovieEntity>>? = null
 
     /**
      * Error
@@ -61,7 +62,7 @@ class MainViewModel @Inject constructor(
 
     private var currentFilter: MovieFilter? = null
 
-    override fun getMovies(movieFilter: MovieFilter): Flow<PagingData<Movie>> {
+    override fun getMovies(movieFilter: MovieFilter): Flow<PagingData<MovieEntity>> {
         val lastResult = currentSearchResult
         if (currentFilter == movieFilter && lastResult != null) return lastResult
         currentFilter = movieFilter

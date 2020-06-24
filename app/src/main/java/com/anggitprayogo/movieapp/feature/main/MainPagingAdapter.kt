@@ -4,7 +4,7 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.anggitprayogo.movieapp.data.remote.entity.Movie
+import com.anggitprayogo.movieapp.data.local.entity.MovieEntity
 import com.anggitprayogo.movieapp.feature.main.viewholder.MainViewHolder
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
@@ -12,7 +12,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
  * Created by Anggit Prayogo on 6/23/20.
  */
 @ExperimentalCoroutinesApi
-class MainPagingAdapter: PagingDataAdapter<Movie, RecyclerView.ViewHolder>(MOVIE_COMPARATOR){
+class MainPagingAdapter: PagingDataAdapter<MovieEntity, RecyclerView.ViewHolder>(MOVIE_COMPARATOR){
 
     private lateinit var activity: MainActivity
 
@@ -32,11 +32,11 @@ class MainPagingAdapter: PagingDataAdapter<Movie, RecyclerView.ViewHolder>(MOVIE
     }
 
     companion object {
-        private val MOVIE_COMPARATOR = object : DiffUtil.ItemCallback<Movie>() {
-            override fun areItemsTheSame(oldItem: Movie, newItem: Movie): Boolean =
-                oldItem.id == newItem.id
+        private val MOVIE_COMPARATOR = object : DiffUtil.ItemCallback<MovieEntity>() {
+            override fun areItemsTheSame(oldItem: MovieEntity, newItem: MovieEntity): Boolean =
+                oldItem.movieId == newItem.movieId
 
-            override fun areContentsTheSame(oldItem: Movie, newItem: Movie): Boolean =
+            override fun areContentsTheSame(oldItem: MovieEntity, newItem: MovieEntity): Boolean =
                 oldItem == newItem
         }
     }

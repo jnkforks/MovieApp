@@ -15,7 +15,7 @@ import com.anggitprayogo.core.util.ext.setVisible
 import com.anggitprayogo.core.util.ext.toast
 import com.anggitprayogo.movieapp.BaseApplication
 import com.anggitprayogo.movieapp.R
-import com.anggitprayogo.movieapp.data.local.entity.MovieEntity
+import com.anggitprayogo.movieapp.data.local.entity.FavouriteEntity
 import com.anggitprayogo.movieapp.data.remote.entity.MovieDetail
 import com.anggitprayogo.movieapp.data.remote.entity.MovieReviews
 import com.anggitprayogo.movieapp.data.remote.entity.Review
@@ -32,7 +32,7 @@ class MovieDetailActivity : BaseActivity() {
 
     private var movieDetail: MovieDetail? = null
 
-    private var movieEntity: MovieEntity? = null
+    private var favouriteEntity: FavouriteEntity? = null
 
     private var movieId: String? = null
 
@@ -144,9 +144,9 @@ class MovieDetailActivity : BaseActivity() {
 
     private fun setFavourite(){
         if (favouriteActive) {
-            movieEntity?.let { it1 -> viewModel.deleteMovieFromDb(it1) }
+            favouriteEntity?.let { it1 -> viewModel.deleteMovieFromDb(it1) }
         } else {
-            val movieEntity = MovieEntity(
+            val movieEntity = FavouriteEntity(
                 movieId = movieId?.toInt(),
                 title = movieDetail?.title,
                 genres = movieDetail?.getMetaData(),
@@ -230,7 +230,7 @@ class MovieDetailActivity : BaseActivity() {
         }
     }
 
-    private fun handleStateMovieDetailFromDb(result: List<MovieEntity>) {
+    private fun handleStateMovieDetailFromDb(result: List<FavouriteEntity>) {
         val menuItem = menu?.findItem(R.id.action_favourite)
         menuItem?.let {
             if (result.isEmpty()) {
@@ -240,7 +240,7 @@ class MovieDetailActivity : BaseActivity() {
                 handleBugFloatActionButton()
                 menuItem.setIcon(icon)
             } else {
-                movieEntity = result.first()
+                favouriteEntity = result.first()
                 favouriteActive = true
                 val icon = R.drawable.ic_baseline_favorite_red_24
                 fabFavourite.setImageResource(icon)

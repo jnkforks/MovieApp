@@ -5,7 +5,7 @@ import androidx.lifecycle.Observer
 import com.anggitprayogo.core.util.state.ResultState
 import com.anggitprayogo.core.util.thread.TestSchedulerProvider
 import com.anggitprayogo.movieapp.TestDataSourceMovies
-import com.anggitprayogo.movieapp.data.local.entity.MovieEntity
+import com.anggitprayogo.movieapp.data.local.entity.FavouriteEntity
 import com.anggitprayogo.movieapp.domain.MovieUseCase
 import com.anggitprayogo.movieapp.getResponseErrorValue
 import kotlinx.coroutines.Dispatchers
@@ -27,13 +27,13 @@ class FavouriteListViewModelTest{
     val instantTaskExecutor = InstantTaskExecutorRule()
 
     @Mock
-    lateinit var favouriteMovies: Observer<List<MovieEntity>>
+    lateinit var favouriteMovies: Observer<List<FavouriteEntity>>
 
     @Mock
     lateinit var error: Observer<String>
 
     @Captor
-    lateinit var argResultCaptor: ArgumentCaptor<List<MovieEntity>>
+    lateinit var argResultCaptor: ArgumentCaptor<List<FavouriteEntity>>
 
     @Captor
     lateinit var argErrorCaptor: ArgumentCaptor<String>

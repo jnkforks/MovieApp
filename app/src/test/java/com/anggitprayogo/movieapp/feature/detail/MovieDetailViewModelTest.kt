@@ -5,7 +5,7 @@ import androidx.lifecycle.Observer
 import com.anggitprayogo.core.util.state.ResultState
 import com.anggitprayogo.core.util.thread.TestSchedulerProvider
 import com.anggitprayogo.movieapp.TestDataSourceMovies
-import com.anggitprayogo.movieapp.data.local.entity.MovieEntity
+import com.anggitprayogo.movieapp.data.local.entity.FavouriteEntity
 import com.anggitprayogo.movieapp.data.remote.entity.MovieDetail
 import com.anggitprayogo.movieapp.data.remote.entity.MovieReviews
 import com.anggitprayogo.movieapp.domain.MovieUseCase
@@ -36,7 +36,7 @@ class MovieDetailViewModelTest {
     lateinit var reviews: Observer<MovieReviews>
 
     @Mock
-    lateinit var movieListDb: Observer<List<MovieEntity>>
+    lateinit var favouriteListDb: Observer<List<FavouriteEntity>>
 
     @Mock
     lateinit var error: Observer<String>
@@ -51,7 +51,7 @@ class MovieDetailViewModelTest {
     lateinit var argResultReviewsCaptor: ArgumentCaptor<MovieReviews>
 
     @Captor
-    lateinit var argResultMovieListDbCaptor: ArgumentCaptor<List<MovieEntity>>
+    lateinit var argResultFavouriteListDbCaptor: ArgumentCaptor<List<FavouriteEntity>>
 
     @Captor
     lateinit var argNetworkCaptor: ArgumentCaptor<Boolean>
@@ -81,7 +81,7 @@ class MovieDetailViewModelTest {
     private fun observeMovie() {
         SUT.resultDetailMovie.observeForever(movie)
         SUT.resultReviews.observeForever(reviews)
-        SUT.resultDetailFromDb.observeForever(movieListDb)
+        SUT.resultDetailFromDb.observeForever(favouriteListDb)
         SUT.error.observeForever(error)
         SUT.networkError.observeForever(network)
     }
@@ -129,9 +129,9 @@ class MovieDetailViewModelTest {
         SUT.getMovieDetailDb(movieId)
 
         //assert
-        verify(movieListDb, atLeastOnce()).onChanged(argResultMovieListDbCaptor.capture())
-        Assert.assertEquals(response.data, argResultMovieListDbCaptor.allValues.first())
-        clearInvocations(useCase, movieListDb)
+        verify(favouriteListDb, atLeastOnce()).onChanged(argResultFavouriteListDbCaptor.capture())
+        Assert.assertEquals(response.data, argResultFavouriteListDbCaptor.allValues.first())
+        clearInvocations(useCase, favouriteListDb)
     }
 
     @Test

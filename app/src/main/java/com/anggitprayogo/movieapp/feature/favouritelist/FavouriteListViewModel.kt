@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.anggitprayogo.core.base.BaseViewModel
 import com.anggitprayogo.core.util.state.ResultState
 import com.anggitprayogo.core.util.thread.SchedulerProvider
-import com.anggitprayogo.movieapp.data.local.entity.MovieEntity
+import com.anggitprayogo.movieapp.data.local.entity.FavouriteEntity
 import com.anggitprayogo.movieapp.domain.MovieUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -27,8 +27,8 @@ class FavouriteListViewModel @Inject constructor(
     /**
      * Movie State
      */
-    private val _resultMovies = MutableLiveData<List<MovieEntity>>()
-    val resultMovies: LiveData<List<MovieEntity>>
+    private val _resultMovies = MutableLiveData<List<FavouriteEntity>>()
+    val resultMovies: LiveData<List<FavouriteEntity>>
         get() = _resultMovies
 
     /**

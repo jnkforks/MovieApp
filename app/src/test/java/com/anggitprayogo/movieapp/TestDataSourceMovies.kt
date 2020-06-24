@@ -1,6 +1,6 @@
 package com.anggitprayogo.movieapp
 
-import com.anggitprayogo.movieapp.data.local.entity.MovieEntity
+import com.anggitprayogo.movieapp.data.local.entity.FavouriteEntity
 import com.anggitprayogo.movieapp.data.remote.entity.*
 import org.mockito.Mockito.mock
 
@@ -31,7 +31,7 @@ object TestDataSourceMovies {
     )
 
     val moviesEntityList = listOf(
-        mock(MovieEntity::class.java),
-        mock(MovieEntity::class.java)
+        mock(FavouriteEntity::class.java),
+        mock(FavouriteEntity::class.java)
     )
 }

@@ -1,17 +1,9 @@
 package com.anggitprayogo.movieapp.feature.main
 
-import android.content.Intent
-import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import androidx.core.app.ActivityOptionsCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.anggitprayogo.core.util.ext.load
-import com.anggitprayogo.movieapp.R
 import com.anggitprayogo.movieapp.data.remote.entity.Movie
-import com.anggitprayogo.movieapp.feature.detail.MovieDetailActivity
 import com.anggitprayogo.movieapp.feature.main.viewholder.MainViewHolder
-import kotlinx.android.synthetic.main.row_item_movie.view.*
 
 
 /**

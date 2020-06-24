@@ -4,14 +4,13 @@ import androidx.paging.PagingData
 import com.anggitprayogo.core.util.ext.safeApiCall
 import com.anggitprayogo.core.util.state.ResultState
 import com.anggitprayogo.movieapp.data.enum.MovieFilter
+import com.anggitprayogo.movieapp.data.local.entity.FavouriteEntity
 import com.anggitprayogo.movieapp.data.local.entity.MovieEntity
 import com.anggitprayogo.movieapp.data.remote.entity.Movie
 import com.anggitprayogo.movieapp.data.remote.entity.MovieDetail
 import com.anggitprayogo.movieapp.data.remote.entity.MovieReviews
-import com.anggitprayogo.movieapp.data.remote.entity.Movies
 import com.anggitprayogo.movieapp.data.repository.MovieRepository
 import kotlinx.coroutines.flow.Flow
-import retrofit2.Response
 import javax.inject.Inject
 
 /**
@@ -23,11 +22,11 @@ class MovieUseCase @Inject constructor(
     /**
      * Remote
      */
-    fun getMoviesByTypePageSource(movieFilter: MovieFilter): Flow<PagingData<Movie>> {
+    fun getMoviesByTypePageSource(movieFilter: MovieFilter): Flow<PagingData<MovieEntity>> {
         return fetchMovieByTypePagingSource(movieFilter)
     }
 
-    private fun fetchMovieByTypePagingSource(movieFilter: MovieFilter): Flow<PagingData<Movie>> {
+    private fun fetchMovieByTypePagingSource(movieFilter: MovieFilter): Flow<PagingData<MovieEntity>> {
         return when (movieFilter) {
             MovieFilter.POPULAR -> movieRepository.getPopularMoviePagingSource()
             MovieFilter.NOW_PLAYING -> movieRepository.getNowPlayingMoviePagingSource()
@@ -62,7 +61,7 @@ class MovieUseCase @Inject constructor(
     /**
      * Local Db Movie Dao
      */
-    suspend fun getFavouriteMovie(): ResultState<List<MovieEntity>> {
+    suspend fun getFavouriteMovie(): ResultState<List<FavouriteEntity>> {
         return try {
             val response = movieRepository.fetchAllMoviesDao()
             ResultState.Success(response)
@@ -71,7 +70,7 @@ class MovieUseCase @Inject constructor(
         }
     }
 
-    suspend fun getMovieDetailByMovieId(movieId: Int): ResultState<List<MovieEntity>> {
+    suspend fun getMovieDetailByMovieId(movieId: Int): ResultState<List<FavouriteEntity>> {
         return try {
             val response = movieRepository.fetchMovieByMovieId(movieId)
             ResultState.Success(response)
@@ -80,17 +79,17 @@ class MovieUseCase @Inject constructor(
         }
     }
 
-    suspend fun insertMovieToDb(movieEntity: MovieEntity) {
+    suspend fun insertMovieToDb(favouriteEntity: FavouriteEntity) {
         try {
-            movieRepository.insertMovie(movieEntity)
+            movieRepository.insertMovie(favouriteEntity)
         } catch (e: Exception) {
             throw Exception(e)
         }
     }
 
-    suspend fun deleteMovieFromDb(movieEntity: MovieEntity) {
+    suspend fun deleteMovieFromDb(favouriteEntity: FavouriteEntity) {
         try {
-            movieRepository.deleteMovie(movieEntity)
+            movieRepository.deleteMovie(favouriteEntity)
         } catch (e: Exception) {
             throw Exception(e)
         }

@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.anggitprayogo.core.base.BaseViewModel
 import com.anggitprayogo.core.util.state.ResultState
 import com.anggitprayogo.core.util.thread.SchedulerProvider
-import com.anggitprayogo.movieapp.data.local.entity.MovieEntity
+import com.anggitprayogo.movieapp.data.local.entity.FavouriteEntity
 import com.anggitprayogo.movieapp.domain.MovieUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -18,8 +18,8 @@ import javax.inject.Inject
  */
 interface FavouriteDetailContract {
     fun getMovieDetailDb(movieId: String)
-    fun insertMovieToDb(movieEntity: MovieEntity)
-    fun deleteMovieFromDb(movieEntity: MovieEntity)
+    fun insertMovieToDb(favouriteEntity: FavouriteEntity)
+    fun deleteMovieFromDb(favouriteEntity: FavouriteEntity)
 }
 
 class FavouriteDetailViewModel @Inject constructor(
@@ -44,8 +44,8 @@ class FavouriteDetailViewModel @Inject constructor(
     /**
      * Movie Detail from db
      */
-    private val _resultDetailFromDb = MutableLiveData<List<MovieEntity>>()
-    val resultDetailFromDb: LiveData<List<MovieEntity>>
+    private val _resultDetailFromDb = MutableLiveData<List<FavouriteEntity>>()
+    val resultDetailFromDb: LiveData<List<FavouriteEntity>>
         get() = _resultDetailFromDb
 
     /**
@@ -68,10 +68,10 @@ class FavouriteDetailViewModel @Inject constructor(
         }
     }
 
-    override fun insertMovieToDb(movieEntity: MovieEntity) {
+    override fun insertMovieToDb(favouriteEntity: FavouriteEntity) {
         launch {
             try {
-                useCase.insertMovieToDb(movieEntity)
+                useCase.insertMovieToDb(favouriteEntity)
                 withContext(Dispatchers.Main) {
                     _resultInsertMovieToDb.postValue(true)
                 }
@@ -83,10 +83,10 @@ class FavouriteDetailViewModel @Inject constructor(
         }
     }
 
-    override fun deleteMovieFromDb(movieEntity: MovieEntity) {
+    override fun deleteMovieFromDb(favouriteEntity: FavouriteEntity) {
         launch {
             try {
-                useCase.deleteMovieFromDb(movieEntity)
+                useCase.deleteMovieFromDb(favouriteEntity)
                 withContext(Dispatchers.Main) {
                     _resultDeleteMovieFromDb.postValue(true)
                 }

@@ -11,7 +11,7 @@ import com.anggitprayogo.core.util.ext.load
 import com.anggitprayogo.core.util.ext.toast
 import com.anggitprayogo.movieapp.BaseApplication
 import com.anggitprayogo.movieapp.R
-import com.anggitprayogo.movieapp.data.local.entity.MovieEntity
+import com.anggitprayogo.movieapp.data.local.entity.FavouriteEntity
 import com.google.android.material.appbar.AppBarLayout
 import kotlinx.android.synthetic.main.activity_favourite_detail.appBarLayout
 import kotlinx.android.synthetic.main.activity_favourite_detail.fabFavourite
@@ -31,7 +31,7 @@ class FavouriteDetailActivity : BaseActivity() {
     private lateinit var viewModel: FavouriteDetailViewModel
 
     private var movieId: String? = null
-    private var movieEntity: MovieEntity? = null
+    private var favouriteEntity: FavouriteEntity? = null
 
     private var menu: Menu? = null
     private var favouriteActive = false
@@ -88,7 +88,7 @@ class FavouriteDetailActivity : BaseActivity() {
     private fun showMenuFavourite(id: Int) {
         val item = menu?.findItem(id)
         item?.isVisible = true
-        setActionBarTitle(movieEntity?.title)
+        setActionBarTitle(favouriteEntity?.title)
     }
 
     private fun setActionBarTitle(title: String?) {
@@ -136,13 +136,13 @@ class FavouriteDetailActivity : BaseActivity() {
 
     private fun addOrRemoveMovieAction() {
         if (favouriteActive) {
-            movieEntity?.let { it1 -> viewModel.deleteMovieFromDb(it1) }
+            favouriteEntity?.let { it1 -> viewModel.deleteMovieFromDb(it1) }
         } else {
-            movieEntity?.let { it1 -> viewModel.insertMovieToDb(it1) }
+            favouriteEntity?.let { it1 -> viewModel.insertMovieToDb(it1) }
         }
     }
 
-    private fun handleStateMovieDetailFromDb(result: List<MovieEntity>) {
+    private fun handleStateMovieDetailFromDb(result: List<FavouriteEntity>) {
         val menuItem = menu?.findItem(R.id.action_favourite)
         menuItem?.let {
             if (result.isEmpty()) {
@@ -152,7 +152,7 @@ class FavouriteDetailActivity : BaseActivity() {
                 handleBugFloatActionButton()
                 menuItem.setIcon(icon)
             } else {
-                movieEntity = result.first()
+                favouriteEntity = result.first()
                 favouriteActive = true
                 val icon = R.drawable.ic_baseline_favorite_red_24
                 fabFavourite.setImageResource(icon)
@@ -164,7 +164,7 @@ class FavouriteDetailActivity : BaseActivity() {
     }
 
     private fun bindDataToView() {
-        movieEntity?.let { movie ->
+        favouriteEntity?.let { movie ->
             ivBannerMovie.load(movie.bannerUrl ?: "")
             tvMovieMetaData.text = movie.genres
             tvMovieTitle.text = movie.title

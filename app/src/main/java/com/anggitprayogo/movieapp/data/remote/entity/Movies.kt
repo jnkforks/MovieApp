@@ -36,10 +36,6 @@ data class Movie(
     val genreIds: List<Int>?,
     @SerializedName("id")
     val id: Int?,
-    @SerializedName("original_language")
-    val originalLanguage: String?,
-    @SerializedName("original_title")
-    val originalTitle: String?,
     @SerializedName("overview")
     val overview: String?,
     @SerializedName("popularity")

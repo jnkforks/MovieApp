@@ -8,7 +8,7 @@ import androidx.core.app.ActivityOptionsCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.anggitprayogo.core.util.ext.load
 import com.anggitprayogo.movieapp.R
-import com.anggitprayogo.movieapp.data.local.entity.MovieEntity
+import com.anggitprayogo.movieapp.data.local.entity.FavouriteEntity
 import com.anggitprayogo.movieapp.feature.detail.MovieDetailActivity
 import com.anggitprayogo.movieapp.feature.favouritedetail.FavouriteDetailActivity
 import kotlinx.android.synthetic.main.row_item_movie.view.*
@@ -18,10 +18,10 @@ import kotlinx.android.synthetic.main.row_item_movie.view.*
  */
 class FavouriteListAdapter : RecyclerView.Adapter<FavouriteListAdapter.ViewHolder>() {
 
-    private var items: MutableList<MovieEntity> = mutableListOf()
+    private var items: MutableList<FavouriteEntity> = mutableListOf()
     private lateinit var activity: FavouriteListActivity
 
-    fun setItems(items: MutableList<MovieEntity>) {
+    fun setItems(items: MutableList<FavouriteEntity>) {
         this.items = items
         notifyDataSetChanged()
     }
@@ -52,14 +52,14 @@ class FavouriteListAdapter : RecyclerView.Adapter<FavouriteListAdapter.ViewHolde
         }
 
         fun bindItem(
-            movie: MovieEntity,
+            favourite: FavouriteEntity,
             activity: FavouriteListActivity
         ) {
             with(itemView) {
-                ivMovie.load(movie.posterUrl ?: "")
-                tvMovieTitle.text = movie.title
-                tvReleaseDate.text = movie.releaseDate
-                tvOverview.text = movie.overview
+                ivMovie.load(favourite.posterUrl ?: "")
+                tvMovieTitle.text = favourite.title
+                tvReleaseDate.text = favourite.releaseDate
+                tvOverview.text = favourite.overview
             }
 
             itemView.setOnClickListener {
@@ -71,7 +71,7 @@ class FavouriteListAdapter : RecyclerView.Adapter<FavouriteListAdapter.ViewHolde
                     )
 
                 val intent = Intent(itemView.context, FavouriteDetailActivity::class.java).apply {
-                    putExtra(MovieDetailActivity.MOVIE_ID_KEY, movie.movieId.toString())
+                    putExtra(MovieDetailActivity.MOVIE_ID_KEY, favourite.movieId.toString())
                 }
                 itemView.context.startActivity(intent, activityOptionsCompat.toBundle())
             }

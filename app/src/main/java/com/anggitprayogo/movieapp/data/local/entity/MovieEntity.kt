@@ -3,19 +3,27 @@ package com.anggitprayogo.movieapp.data.local.entity
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.anggitprayogo.movieapp.BuildConfig
 
 /**
- * Created by Anggit Prayogo on 6/21/20.
+ * Created by Anggit Prayogo on 6/23/20.
  */
 @Entity(tableName = "movies")
 data class MovieEntity(
-    @PrimaryKey(autoGenerate = true) val uid: Long? = null,
-    @ColumnInfo(name = "movie_id") val movieId: Int?,
+    @PrimaryKey @ColumnInfo(name = "movie_id") val movieId: Long?,
     @ColumnInfo(name = "title") val title: String?,
     @ColumnInfo(name = "genres") val genres: String?,
-    @ColumnInfo(name = "vote") val vote: Double?,
+    @ColumnInfo(name = "vote_count") val voteCount: Int?,
+    @ColumnInfo(name = "vote_avarage") val voteAvarage: Double?,
     @ColumnInfo(name = "release_date") val releaseDate: String?,
     @ColumnInfo(name = "overview") val overview: String?,
-    @ColumnInfo(name = "banner_url") val bannerUrl: String?,
-    @ColumnInfo(name = "poster_url") val posterUrl: String?
-)
+    @ColumnInfo(name = "backdrop_path") val backdropPath: String?,
+    @ColumnInfo(name = "poster_path") val posterPath: String?,
+    @ColumnInfo(name = "adult") val adult: Boolean?,
+    @ColumnInfo(name = "popularity") val popularity: Double?
+){
+    fun getPoster(): String {
+        return BuildConfig.IMAGE_URL + posterPath
+    }
+}
+

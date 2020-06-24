@@ -1,11 +1,11 @@
 package com.anggitprayogo.movieapp.data.repository
 
 import androidx.paging.PagingData
+import com.anggitprayogo.movieapp.data.local.entity.FavouriteEntity
 import com.anggitprayogo.movieapp.data.local.entity.MovieEntity
 import com.anggitprayogo.movieapp.data.remote.entity.Movie
 import com.anggitprayogo.movieapp.data.remote.entity.MovieDetail
 import com.anggitprayogo.movieapp.data.remote.entity.MovieReviews
-import com.anggitprayogo.movieapp.data.remote.entity.Movies
 import kotlinx.coroutines.flow.Flow
 import retrofit2.Response
 
@@ -17,13 +17,13 @@ interface MovieRepository {
     /**
      * Remote
      */
-    fun getPopularMoviePagingSource(): Flow<PagingData<Movie>>
+    fun getPopularMoviePagingSource(): Flow<PagingData<MovieEntity>>
 
-    fun getUpcomingMoviePagingSource(): Flow<PagingData<Movie>>
+    fun getUpcomingMoviePagingSource(): Flow<PagingData<MovieEntity>>
 
-    fun getNowPlayingMoviePagingSource(): Flow<PagingData<Movie>>
+    fun getNowPlayingMoviePagingSource(): Flow<PagingData<MovieEntity>>
 
-    fun getTopRatedMoviePagingSource(): Flow<PagingData<Movie>>
+    fun getTopRatedMoviePagingSource(): Flow<PagingData<MovieEntity>>
 
     suspend fun getDetailMovie(movieId: String): Response<MovieDetail>
 
@@ -33,11 +33,11 @@ interface MovieRepository {
     /**
      * Local
      */
-    suspend fun fetchAllMoviesDao(): List<MovieEntity>
+    suspend fun fetchAllMoviesDao(): List<FavouriteEntity>
 
-    suspend fun fetchMovieByMovieId(movieId: Int): List<MovieEntity>
+    suspend fun fetchMovieByMovieId(movieId: Int): List<FavouriteEntity>
 
-    suspend fun insertMovie(movieEntity: MovieEntity)
+    suspend fun insertMovie(favouriteEntity: FavouriteEntity)
 
-    suspend fun deleteMovie(movieEntity: MovieEntity)
+    suspend fun deleteMovie(favouriteEntity: FavouriteEntity)
 }

@@ -8,7 +8,7 @@ import androidx.core.app.ActivityOptionsCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.anggitprayogo.core.util.ext.load
 import com.anggitprayogo.movieapp.R
-import com.anggitprayogo.movieapp.data.remote.entity.Movie
+import com.anggitprayogo.movieapp.data.local.entity.MovieEntity
 import com.anggitprayogo.movieapp.feature.detail.MovieDetailActivity
 import com.anggitprayogo.movieapp.feature.main.MainActivity
 import kotlinx.android.synthetic.main.row_item_movie.view.*
@@ -30,14 +30,14 @@ class MainViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     }
 
     fun bindItem(
-        movie: Movie,
+        movie: MovieEntity?,
         activity: MainActivity?
     ) {
         with(itemView) {
-            ivMovie.load(movie.getPoster())
-            tvMovieTitle.text = movie.title
-            tvReleaseDate.text = movie.releaseDate
-            tvOverview.text = movie.overview
+            ivMovie.load(movie?.getPoster() ?: "")
+            tvMovieTitle.text = movie?.title
+            tvReleaseDate.text = movie?.releaseDate
+            tvOverview.text = movie?.overview
         }
 
         itemView.setOnClickListener {
@@ -48,7 +48,7 @@ class MainViewHolder(view: View) : RecyclerView.ViewHolder(view) {
                     "imageMain"
                 )
             val intent = Intent(itemView.context, MovieDetailActivity::class.java).apply {
-                putExtra(MovieDetailActivity.MOVIE_ID_KEY, movie.id.toString())
+                putExtra(MovieDetailActivity.MOVIE_ID_KEY, movie?.movieId.toString())
             }
             itemView.context.startActivity(intent, activityOptionsCompat.toBundle())
         }
