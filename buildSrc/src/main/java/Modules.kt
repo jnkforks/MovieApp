@@ -5,8 +5,13 @@ object Modules {
     //app
     const val app = ":app"
 
+    //features
+    const val movies = ":features:movies"
+    const val favourite = ":features:favourite"
+
     //libraries level
-    const val core = ":core"
+    const val core = ":libraries:core"
+    const val network = ":libraries:network"
 
     //data level
     const val data = ":data"

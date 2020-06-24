@@ -1,0 +1,21 @@
+apply from: "$rootDir/common.gradle"
+
+dependencies{
+
+    /*Android Support*/
+    implementation AndroidSupport.design
+    implementation AndroidSupport.appCompat
+    implementation AndroidSupport.constraintLayout
+
+    /*Glide*/
+    implementation Glide.glide
+    kapt Glide.glideCompiler
+
+    /*Font Adapter*/
+    implementation FontAdapter.calligraphy
+    implementation FontAdapter.viewPump
+
+    /*Coroutine*/
+    implementation Coroutines.core
+    implementation Coroutines.android
+}

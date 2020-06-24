@@ -1,0 +1,31 @@
+apply from: "$rootDir/common.gradle"
+
+dependencies{
+    /*Coroutine*/
+    implementation Coroutines.core
+    implementation Coroutines.android
+
+    //Room
+    implementation Room.room
+    kapt Room.roomCompiler
+    implementation Room.roomKtx
+
+    //Networking
+    implementation Retrofit.retrofit
+    implementation Retrofit.gson
+    implementation Retrofit.gsonConverter
+    implementation Retrofit.okHttpLogging
+    implementation Retrofit.coroutinesAdapter
+
+    //Jetpack
+    implementation Jetpack.lifecycle
+    kapt Jetpack.lifecycleCompiler
+    implementation Jetpack.appInitializer
+    implementation Jetpack.paging
+
+    //dagger
+    implementation Dagger.dagger
+    kapt Dagger.daggerCompiler
+
+    implementation project(Modules.network)
+}
